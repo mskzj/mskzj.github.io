@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="keywords" content="敬畏之心">
+  <meta name="description" content="学习代码之路">
+  
+  <title>慕斯抗真菌</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/materialize.min.css">
+    
+      <link rel="stylesheet" href="/css/main.min.css">
+    
+  
+  <style type="text/css">
+      html{
+          font-family: sans-serif;
+          font-weight: 300;
+      }
+      @font-face {
+          font-family: 'Material Icons';
+          font-style: normal;
+          font-weight: 400;
+          src: url(/fonts/MaterialIcons-Regular.eot);
+          src: url(/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+          url(/fonts/MaterialIcons-Regular.woff) format('woff'),
+          url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
+      }
+  </style>
+<link rel="shortcut icon" href="/source/favicon.ico">
+</head>
+<body>
+<div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
+<div id="menu-outer">
+  <div id="menu-inner">
+      <ul id="slide-out" class="side-nav" >
+    <div class="nav-header"  style="background-image: url(/images/header-bg.png);background-color:#00e699">
+    <div class="header-box"><img src="/images/明石.jpg" ondragstart="return false;"></div>
+    <p></p>
+    <div class="nav-link">
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box twitter"></div></a>
+        
+        
+        <a  href="http://example.com" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:http://example.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box zhihu"></div></a>
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
+    <!--Homepage-->
+
+<li class="nav-list">
+    <a href="/" target="_self">
+        <div class="nav-ico"><i class="material-icons">home</i> </div><p>主页</p>
+    </a>
+</li>
+
+<!--archives-->
+
+<li class="nav-list dropdown-btn">
+    <a  class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">assignment</i></div><p>归档</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+    </li>
+</ul>
+<!--categories-->
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        
+    </li>
+</ul>
+<!--tags-->
+
+<li class="nav-list">
+    <a href="/archives" target="_self">
+        <div class="nav-ico"><i class="material-icons">bookmark</i> </div><p>标签</p>
+    </a>
+</li>
+
+<!--photo-->
+
+<!--friends-->
+
+<!--about-->
+
+
+</ul>
+
+  </div>
+</div>
+
+<div id="content-outer">
+  <div id="content-inner">
+    
+<article id="post">
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-7.png)" >
+  <h2>sqli_labs 练习笔记</h2>
+    
+  <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-02-17T16:00:00.000Z">
+          2018-02-18
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>sqli_labs这个神奇的练习sql注入的地方真的挺不错的，小白的靶场。在练习之前，去看看PHP和sql的查询语句能使练习事半功倍。<br>话不多说,开始愉快的练习之旅(ง •_•)ง<br>这里贴一个学习链接<a href="http://bbs.51cto.com/viewthread.php?tid=1148930" target="_blank" rel="noopener">传送门</a></p>
+<p>###Less-1 <strong>Error Based- 单引号字符</strong><br>这里显示的sql语句能帮助我们更好的分析问题（当然不是自带的）<br>在url中输入？id=1可以看到<br><img src="http://upload-images.jianshu.io/upload_images/9233083-1996b2911d489b89.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="id=1"><br>可以通过改变id发现不同的name和password，这就获取不同的信息？当然没那么简单（；´д｀）ゞ<br>看到第一节的标题很明显提示了我们这一节应该是和单引号有关系。那么试试这个呢<br><img src="http://upload-images.jianshu.io/upload_images/9233083-53b938883752aaa9.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="?id=1&#39;"><br>于是发现出现了错误<br>那么 limit 0，1又是什么意思？？？？<br>LIMIT 0,1，表示从第一个元素即其下标为0开始返回总数为1个的元素，也就是每次查询只会返回一个查询数据。继续撸起袖子，加油思考。<br>那么既然出错了，那就试试是不是真的存在sql漏洞<br><img src="http://upload-images.jianshu.io/upload_images/9233083-c0952a5a6e301298.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="？id=1&#39;and &#39;1‘=’2是一个为假的语句"><br>果然执行了。看来是真的存在漏洞，这样就可以肆无忌惮的开始利用这漏洞进行查询了。<br>大体’剥洋葱’思路：字段–数据库名-数据库的表-表中的内容<br><em>1.</em><br>猜字段用 order by 语句,再用#将后面一个‘注释掉，构造成我们想要的语句<br><img src="http://upload-images.jianshu.io/upload_images/9233083-843e43b38b3da13f.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="出现问题了。。。"><br>没有将#进行编码<br><img src="http://upload-images.jianshu.io/upload_images/9233083-6900b39a87b098fe.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="将#用%23替换就没有问题了"><br>继续试试<br><img src="http://upload-images.jianshu.io/upload_images/9233083-086a471b39062aaf.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>发现没有第四个字段，所以字段就是3了<br><em>2.</em><br>接着查询，union select（联合查询语句） 那三个字段<br>使用 union select 1，2，3 没有出现想要的数据库名啊，换成database()依旧不行，这是为什么？用函数试一试<br><img src="http://upload-images.jianshu.io/upload_images/9233083-3a66a8a484dd76e2.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>其中：<br>user()返回当前数据库连接使用的用户<br>database()返回当前数据库连接使用的数据库<br>version()返回当前数据库的版本<br>通常会使用concat-ws函数来将这些函数进行组合使用并显示出来。<br>char()函数为将里面的参数转化为相应的字符，32为空格，58为冒号(:)，通过这样的方式可以绕过一些简单的过滤机制。<br>然而依旧不行，心中跑过一万只草泥马<br>于是通过搜索这个问题发现是因为在源码中mysql_fetch_array() 函数只能取其中一行来进行输出。所以只能显示这个bumb,后面的语句都没有显示出来。于是乎，嘿嘿嘿嘿，那就让前面的两个查询字段失效就OK了，那么从id上下手让他没有name和password，只有第三个查询字段。<br> <img src="http://upload-images.jianshu.io/upload_images/9233083-c6e539981e17b8ef.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="换成id=0或者字符或者负数"><br>出现了，数据库名就是<strong>security</strong><br><em>3.</em><br>继续查询这个数据库的表格名<br>使用的group_concat函数一下把所有的表格名写出来，也可以改变limit的值来遍历表格。<br><img src="http://upload-images.jianshu.io/upload_images/9233083-2f60a9eb5f9f116c.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="group_concat"><br>于是这个数据库一共有四个表格，我们选择users表来继续<br><em>4.</em><br>依旧使用group_concat函数来查询，不过这次查询的是users表的列（column）<br><img src="http://upload-images.jianshu.io/upload_images/9233083-3184e9f511331dba.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="users"><br>得到列名以后，就开始可以用列名来得到数据了<br><em>5.</em><br>继续用group_concat，然而这个结果。。。。有点难以辨认啊<br><img src="http://upload-images.jianshu.io/upload_images/9233083-787f226d7a00b5f0.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="黑脸.JPG"><br>换一种姿势，加上concat_ws<br><img src="http://upload-images.jianshu.io/upload_images/9233083-1c5533ef4cd4b8f5.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="好看多了"></p>
+<p>####总结：<br>1.关于注入的关键是找到sql语句的语法<br>   常用查询语句是group_concat和concat_ws<br>2.单引号的注入是用以闭合之前的查询语句</p>
+<p>###Less-2 <strong>Error Based- 整型数字</strong><br>首先给出?id=1看看<br><img src="http://upload-images.jianshu.io/upload_images/9233083-d443e9a08d1dea8f.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="id.PNG"><br>在测试一下能不能字符型注入<br><img src="http://upload-images.jianshu.io/upload_images/9233083-de10ea91ef30ed81.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="id=1&#39;.PNG"><br>看来是不行的呢，但是看看这个错误信息他是多了一个’（单引号），那么可不可能这个sql语句之中不需要引号呢<br>来测试一下<br><img src="http://upload-images.jianshu.io/upload_images/9233083-0b9521c6a4d9f239.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><img src="http://upload-images.jianshu.io/upload_images/9233083-e2783e0e6542a5d6.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="出现问题了.PNG"><img src="http://upload-images.jianshu.io/upload_images/9233083-d88f94afb36f8b32.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="将+变成%2B.PNG"><br>查询结果一样，如此看来是和字符没有关系了。<br>来直接构造注入语句吧<br><em>1.字段</em><br><img src="http://upload-images.jianshu.io/upload_images/9233083-f7ab255a1039b634.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><em>2.数据库名</em><br><img src="http://upload-images.jianshu.io/upload_images/9233083-67da8f759e5c9cf3.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br><em>3.该干嘛干嘛</em><br>剩下的和第一节步骤一样了。(☆▽☆)</p>
+<p>###Less-3  Error Based- 带引号的单引号<br>老样子用<strong>?id=1’</strong>测试一哈<br><img src="http://upload-images.jianshu.io/upload_images/9233083-04b31a4543b11357.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="直接报错了"><br>我们看一下报错的信息（打红圈的地方）是     <strong>‘1’’)</strong>  ,去掉注入的地方得到的是<strong>‘ ‘)</strong>，也就是说比第一节的地方多了个 <strong>)</strong><br>于是大胆推测他的select语句会不会是  <strong>(‘      ‘)</strong> ,俗话说还是要搞一下才知道( •̀ ω •́ )✧<br><img src="http://upload-images.jianshu.io/upload_images/9233083-9c1e9fd32f257138.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用%23注释掉多余的括号和单引号"><br>啊哈，和id=1时的结果一样了。决定就是你了，剩下的步骤就和第一节差不多了。</p>
+<p>###Less-4  Error Based- 双引号<br>用常用的 <strong>id=1’</strong> 来试试。<br><img src="http://upload-images.jianshu.io/upload_images/9233083-88f8c2962e55615c.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="id=1‘.PNG"><br>没有问题，那换一下本章所用的双引号来卡看。嗯，果然出现问题了。来看看看后半句 <strong>“1”)</strong>,继续构造语句。<br><img src="http://upload-images.jianshu.io/upload_images/9233083-d2a7758d4baa4c8f.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>嗯，和第三节相似<br><img src="http://upload-images.jianshu.io/upload_images/9233083-b26267c59c8ecf06.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="用%23注释掉后面的双引号和括号.PNG"><br>bingo！</p>
+<p>###Less-5  Double Injection-单引号</p>
+<p>看到标题顿时一懵，什么是双注入啊，百度一会才晓得是这样的 <strong>当一个聚合函数（通常用count()），比如concat函数后面如果使用分组语句就会把查询的一部分以错误的形式显示出来</strong>  也就是说双注入是要有两个部分来注入，<strong>一个使他得到信息，一个使信息显示出来</strong>。<br>根据试了试id来看果然啥都没有<img src="http://upload-images.jianshu.io/upload_images/9233083-444a4aa578a7bbf8.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="id.PNG"><br>迷之 <strong>you are in………</strong></p>
+<p>确定是否有漏洞<br><img src="http://upload-images.jianshu.io/upload_images/9233083-10b74d979e70ee70.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1=1为真"><br><img src="http://upload-images.jianshu.io/upload_images/9233083-d4a664b7b016bcdb.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1=2为假没有显示"><br>还是有的<br>加个单引号<br><img src="http://upload-images.jianshu.io/upload_images/9233083-1d83f1798d738011.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="出错"><br>看来和第一节的出错点是一样的。字段的查询也是OK的。<br>那么问题来了，如何让我们的查询信息显现出来让我们看到呢。<br>emmmmmmmm,就用出错信息来看到我们想要的数据库名之类的。如何构造这个报错函数少不了count(<em>)，（<a href="http://www.myhack58.com/Article/html/3/7/2016/73471.htm" target="_blank" rel="noopener">这是个学习链接，关于为什么这样构造</a>）<br><strong>group by 作用是分组（这个函数很有用）</strong><br><strong>rand 的使用是为了报错</strong><br>于是乎<br><img src="http://upload-images.jianshu.io/upload_images/9233083-57652c63fe6a935d.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="终于等到你~"><br>不过，由于rand的随机性还是要刷新几次才看得到，同理user，和version的得到也是这样的。but,用rand(0)</em>2就一定会出现。<br>接着查询表<br><img src="http://upload-images.jianshu.io/upload_images/9233083-6e4b6c0f261c2e93.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="一个一个来的节奏"><br><strong>这里本来想用group_concat的来查询的但是弄不出来，技术不够只有手动了</strong><br>继续学习group_concat的用法，<a href="http://blog.csdn.net/see__you__again/article/details/51590548" target="_blank" rel="noopener">group_concat学习链接之一</a>猜测是因为group_concat是多行查询拼接在一起然后返回的结构，而rand只能返回一个<br>差列就和之前差不多<br><img src="http://upload-images.jianshu.io/upload_images/9233083-6e6b12a56d039839.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="继续流下没有技术的眼泪"><br>一个一个的查询………..感觉小镰刀并不能战胜机械化<br>数据：<br><img src="http://upload-images.jianshu.io/upload_images/9233083-01a68e86e2b70c14.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="嘤嘤嘤"></p>
+<p>###Less-6  Double Injection-双引号<br>测试<strong>?id=1”</strong>，出错了<br><img src="http://upload-images.jianshu.io/upload_images/9233083-05734d27ac39b3db.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="似曾相似的感觉"><br>嗯，剩下的和第五节的步骤一样了</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2018/03/20/web前端设计学习体验/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
+    
+
+
+  <!-- Next Nav -->
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
+</div>
+<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
+<script type="text/javascript">
+    menu();
+</script>
+  </div>
+</div>
+<div id="bottom-outer">
+  <div id="bottom-inner">
+    <a  id="top-button" onfocus="this.blur();"><div class="up upinbody" style="background-color:#00e699"><i class="material-icons material-up">vertical_align_top</i></div></a>
+
+
+<p >Copyright ©  2017  慕斯抗真菌</p>
+<p >Powered by <a href="https://hexo.io/" target="_blank"> Hexo </a> & Theme - <a href="https://github.com/moumao/hexo-theme-Vateral" target="_blank">Vateral</a></p>
+<p style="font-size: 10px" id="footer-times" data-time="4/4/2018"></p>
+<script>
+    var beginTime=document.getElementById("footer-times").dataset.time
+    function show_date_time(){
+        var span=document.getElementById("footer-times")
+        window.setTimeout("show_date_time()", 1000);
+        BirthDay=new Date(beginTime);//初始日期
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=Math.floor(e_hrsold);
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=Math.floor((e_hrsold-hrsold)*60);
+        seconds=Math.floor((e_minsold-minsold)*60);
+        span.innerHTML="本站已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+    }
+    show_date_time();
+</script>
+
+  </div>
+</div>
+
+<!--影集界面需要的资源-->
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/materialize.min.js"></script>
+
+<script src="/js/main.min.js"></script>
+
+
+<script>
+    NProgress.start();
+    NProgress.done();
+    lazy();
+    links();
+    window.onpopstate = menu();
+    //pjax操作
+    $(document).pjax('a:not(.nopjax)', '#content-inner', {fragment:'#content-inner', timeout:8000});
+    $(document).on('pjax:start', NProgress.start).on('pjax:end', NProgress.done)
+        .on('pjax:end', () => {
+            dowmdiv();
+            lazy();
+            toc();
+            links();
+            menu();
+        });
+</script>
+
+</body>
+</html>
