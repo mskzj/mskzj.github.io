@@ -118,70 +118,67 @@
 <div id="content-outer">
   <div id="content-inner">
     
-<article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-19.png)" >
-  <h2>web前端设计学习体验 </h2>
-    
-  <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-03-19T16:00:00.000Z">
-          2018-03-20
-    </time>
-  </p>
-    
-  </div>
-  <div class="post-page-content">
-  <p>web前端一般由html,css,javascript等搭成<br>上了学校开的前端设计课后想写一些自己关于前端html,css设计的一些体验和自己走过的坑。一定是要积累沉淀啊。<br><em>个人认为web前端的写时最好时先把内容排好再安排标签样式，先有主体再有外表</em></p>
-<p>###响应式web：<br>刚开始写html用position绝对定位某个标签，虽然把网页铺排看起来还是很正常，但是一把窗口调小一定元素就会东跑西跑，十分不美观。关于这一点是因为前面标签的挤压。<br>不美观怎么办，那我们需要在不同的视口下有不同的样式(๑•̀ㅂ•́)و✧。<br><strong>媒体查询结构</strong></p>
-<pre><code>@media only screen and (这里放条件语句，比如说min-width:400px) {
-                 .....}
-</code></pre><p>这个查询语言也很好记，就是说在screen宽度在多少的时候我们要显示什么样的css，这样做的话就可在一个css文件里放不同显屏时的不同样式了<br><strong>多个外联式css文件</strong></p>
-<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css文件&quot; media=&quot;only screen and (min-width:400px)&quot;&gt;
-</code></pre><p>这里的media用于判断什么时候用啥css文件</p>
-<p>###div<br>对于一段内容来说他可能需要一个地方来安放他，这就可以时我们的div来做这个事。它像一个盒子一样吞吐标签，很大程度上能解决标签的位置等问题</p>
-<p>###居中的奇淫技巧<br>老实说居中问题在刚开始时常让我头秃。<br><strong>body居中</strong><br>整体的内容居中而不用class怎么搞，不如来设置body的最大宽度</p>
-<pre><code>body{
-              max-width: 1200px;
-              margin:auto; 
-      }
-</code></pre><p><strong>div中文本图片居中</strong></p>
-<pre><code>text-align:center ;                              //表示水平居中
-vertical-align: middle;                        //表示垂直居中
-</code></pre><p><strong>绝对位置居中</strong></p>
-<pre><code>position:absolute;
-left: ; right:;                          //左右百分比自行根据网页设置
-</code></pre><p>###浮动<br>浮动的设置能让网页内容更加直观，视觉效果更好。比如让一个图片被文字环绕，若单纯设置绝对位置，很有可能出现图被文字挤到下一行的情况。但用浮动（对图片）配上最大宽度（对文本使用）会让一切很和谐，比如说这个例子<br><img src="https://upload-images.jianshu.io/upload_images/9233083-cfb85986d7a1c0e1.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="float"><br>然而浮动往往会影响下一个标签，这并非吾等所愿意看见的。</p>
-<pre><code>clear:all;                 //清除上一个标签的浮动效果
-</code></pre><p>###max-width<br>这个语句时用来限制我们标签的宽度的，画地为牢，让标签里的东东能够安分的呆在那里面。<br>讲真，用max-width来让两个标签里的内容能够并排到一起十分的方便</p>
-
-  </div>
-  <!--评论块-->
-    
-
-</article>
-<nav class="post-nav">
-  <!-- Prev Nav -->
-    
-  <a href="/2018/04/04/hello-world/" id="post_nav-newer" class="post-nav-content prev-content">
-      新篇
-  </a>
-    
 
 
-  <!-- Next Nav -->
-    
-  <a href="/2018/02/18/sqli-labs-练习笔记/" id="post_nav-older" class="post-nav-content next-content">
-      旧篇
-  </a>
-    
-</nav>
-<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
-<div class="post-toc-none"><p>(无)</p></div>
-<div class="post-toc-box">
-    
+<div class="tags">
+  
 </div>
-<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
-<script type="text/javascript">
-    menu();
-</script>
+
+<div id="recent-posts">
+  
+      <div class="recent-post-item lazy" style="background-color:#00e699"  data-original="/images/random/vateral-1.png"  >
+        <a class="recent-post-link" href="/2018/05/09/段誉——鲜衣怒马是少年/">
+        <div class="post-hover">
+          <!--title-->
+          <p class="post-title"><a href="/2018/05/09/段誉——鲜衣怒马是少年/" >段誉</a></p>
+
+          <!--date-->
+          
+            <p class="post-time"> &nbsp &nbsp 发布于:<time datetime="2018-05-09T14:30:03.000Z">
+              2018-05-09
+            </time>
+            </p>
+          
+
+          <!--tags-->
+
+          标签:
+            
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/读书生活/">读书生活</a></li></ul>
+            
+          <!--分类-->
+
+          分类:
+            
+            暂无分类
+            
+
+          <!--excerpt-->
+          <div class="post-excerpt">
+            <p>
+              摘要：
+              
+                #可爱不过段公子
+“如果在我的小说中选一个角色让我做，我愿做天龙八部的段誉”。                            —–金庸
+一袭青衫，容仪如玉，明净柔和，这便是我眼中的他痴狂的爱着这个世界的美好，这便是我喜爱的他
+###佛系...
+              
+            </p>
+          </div>
+          <div class="post-more"><a href="/2018/05/09/段誉——鲜衣怒马是少年/" >全文阅读</a></div>
+        </div>
+        </a>
+      </div>
+  
+  <nav class="paging">
+    <span class="page-number current">1</span>
+</nav>
+</div>
+
+
+
+
+
   </div>
 </div>
 <div id="bottom-outer">
