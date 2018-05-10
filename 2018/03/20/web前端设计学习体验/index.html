@@ -38,35 +38,7 @@
 <div id="menu-outer">
   <div id="menu-inner">
       <ul id="slide-out" class="side-nav" >
-    <div class="nav-header"  style="background-image: url(/images/header-bg.png);background-color:#00e699">
-    <div class="header-box"><img src="/images/明石.jpg" ondragstart="return false;"></div>
-    <p></p>
-    <div class="nav-link">
-        
-        <a href="http://example.com" target="_blank"> <div class="link-box twitter"></div></a>
-        
-        
-        <a  href="http://example.com" target="_blank"><div class="link-box github"></div></a>
-        
-        
-        <a href="mailto:http://example.com"><div class="link-box email"></div></a>
-        
-        
-        <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
-        
-        
-        <a href="http://example.com" target="_blank"> <div class="link-box zhihu"></div></a>
-        
-    </div>
-    <div class="nav-search">
-        <form id="search-form"> <!-- 搜索框相关 -->
-            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
-            <div class="nav-search-img"><i class="material-icons">search</i></div>
-        </form>
-        <div id="local-search-result"></div> <!-- 搜索结果区 -->
-        <p class='no-result'>无搜索结果</p>
-    </div>
-</div>
+    
     <!--Homepage-->
 
 <li class="nav-list">
@@ -85,14 +57,14 @@
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+        <a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
     </li>
 </ul>
 <!--categories-->
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a>
     </li>
 </ul>
 <!--tags-->
@@ -119,7 +91,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-1.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-17.png)" >
   <h2>web前端设计学习体验 </h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-03-19T16:00:00.000Z">
@@ -129,18 +101,20 @@
     
   </div>
   <div class="post-page-content">
-  <p>web前端一般由html,css,javascript等搭成<br>上了学校开的前端设计课后想写一些自己关于前端html,css设计的一些体验和自己走过的坑。一定是要积累沉淀啊。<br><em>个人认为web前端的写时最好时先把内容排好再安排标签样式，先有主体再有外表</em></p>
-<p>###响应式web：<br>刚开始写html用position绝对定位某个标签，虽然把网页铺排看起来还是很正常，但是一把窗口调小一定元素就会东跑西跑，十分不美观。关于这一点是因为前面标签的挤压。<br>不美观怎么办，那我们需要在不同的视口下有不同的样式(๑•̀ㅂ•́)و✧。<br><strong>媒体查询结构</strong></p>
+  <h3 id="初识web前端"><a href="#初识web前端" class="headerlink" title="初识web前端"></a>初识web前端</h3><hr>
+<p><em>上了学校开的前端设计课后想写一些自己关于前端html,css设计的一些体验和自己走过的坑。一定是要积累沉淀啊。</em><br><em>web前端的写时最好时先把内容排好再安排标签样式，先有主体再有外表</em></p>
+<hr>
+<h3 id="响应式web："><a href="#响应式web：" class="headerlink" title="响应式web："></a>响应式web：</h3><p>&emsp;&emsp;刚开始写html用position绝对定位某个标签，虽然把网页铺排看起来还是很正常，但是一把窗口调小一定元素就会东跑西跑，十分不美观。关于这一点是因为前面标签的挤压。<br>不美观怎么办，那我们需要在不同的视口下有不同的样式(๑•̀ㅂ•́)و✧。<br><strong>媒体查询结构</strong></p>
 <pre><code>@media only screen and (这里放条件语句，比如说min-width:400px) {
                  .....}
 </code></pre><p>这个查询语言也很好记，就是说在screen宽度在多少的时候我们要显示什么样的css，这样做的话就可在一个css文件里放不同显屏时的不同样式了<br><strong>多个外联式css文件</strong></p>
 <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css文件&quot; media=&quot;only screen and (min-width:400px)&quot;&gt;
 </code></pre><p>这里的media用于判断什么时候用啥css文件</p>
-<p>###div<br>对于一段内容来说他可能需要一个地方来安放他，这就可以时我们的div来做这个事。它像一个盒子一样吞吐标签，很大程度上能解决标签的位置等问题</p>
-<p>###居中的奇淫技巧<br>老实说居中问题在刚开始时常让我头秃。<br><strong>body居中</strong><br>整体的内容居中而不用class怎么搞，不如来设置body的最大宽度</p>
+<h3 id="div"><a href="#div" class="headerlink" title="div"></a>div</h3><p>&emsp;&emsp;对于一段内容来说他可能需要一个地方来安放他，这就可以时我们的div来做这个事。它像一个盒子一样吞吐标签，很大程度上能解决标签的位置等问题</p>
+<h3 id="居中的奇淫技巧"><a href="#居中的奇淫技巧" class="headerlink" title="居中的奇淫技巧"></a>居中的奇淫技巧</h3><p>老实说居中问题在刚开始时常让我头秃。<br><strong>body居中</strong><br>整体的内容居中而不用class怎么搞，不如来设置body的最大宽度</p>
 <pre><code>body{
               max-width: 1200px;
-              margin:auto; 
+              margin:auto;
       }
 </code></pre><p><strong>div中文本图片居中</strong></p>
 <pre><code>text-align:center ;                              //表示水平居中
@@ -148,9 +122,9 @@ vertical-align: middle;                        //表示垂直居中
 </code></pre><p><strong>绝对位置居中</strong></p>
 <pre><code>position:absolute;
 left: ; right:;                          //左右百分比自行根据网页设置
-</code></pre><p>###浮动<br>浮动的设置能让网页内容更加直观，视觉效果更好。比如让一个图片被文字环绕，若单纯设置绝对位置，很有可能出现图被文字挤到下一行的情况。但用浮动（对图片）配上最大宽度（对文本使用）会让一切很和谐，比如说这个例子<br><img src="https://upload-images.jianshu.io/upload_images/9233083-cfb85986d7a1c0e1.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="float"><br>然而浮动往往会影响下一个标签，这并非吾等所愿意看见的。</p>
+</code></pre><h3 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h3><p>&emsp;&emsp;浮动的设置能让网页内容更加直观，视觉效果更好。比如让一个图片被文字环绕，若单纯设置绝对位置，很有可能出现图被文字挤到下一行的情况。但用浮动（对图片）配上最大宽度（对文本使用）会让一切很和谐，比如说这个例子<br><img src="https://upload-images.jianshu.io/upload_images/9233083-cfb85986d7a1c0e1.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="float"><br>然而浮动往往会影响下一个标签，这并非吾等所愿意看见的。</p>
 <pre><code>clear:all;                 //清除上一个标签的浮动效果
-</code></pre><p>###max-width<br>这个语句时用来限制我们标签的宽度的，画地为牢，让标签里的东东能够安分的呆在那里面。<br>讲真，用max-width来让两个标签里的内容能够并排到一起十分的方便</p>
+</code></pre><h3 id="max-width"><a href="#max-width" class="headerlink" title="max-width"></a>max-width</h3><p>&emsp;&emsp;这个语句时用来限制我们标签的宽度的，画地为牢，让标签里的东东能够安分的呆在那里面。<br>&emsp;&emsp;讲真，用max-width来让两个标签里的内容能够并排到一起十分的方便</p>
 
   </div>
   <!--评论块-->
@@ -176,7 +150,7 @@ left: ; right:;                          //左右百分比自行根据网页设�
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初识web前端"><span class="post-toc-number">1.</span> <span class="post-toc-text">初识web前端</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#响应式web："><span class="post-toc-number">2.</span> <span class="post-toc-text">响应式web：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#div"><span class="post-toc-number">3.</span> <span class="post-toc-text">div</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#居中的奇淫技巧"><span class="post-toc-number">4.</span> <span class="post-toc-text">居中的奇淫技巧</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浮动"><span class="post-toc-number">5.</span> <span class="post-toc-text">浮动</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#max-width"><span class="post-toc-number">6.</span> <span class="post-toc-text">max-width</span></a></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
@@ -189,8 +163,7 @@ left: ; right:;                          //左右百分比自行根据网页设�
     <a  id="top-button" onfocus="this.blur();"><div class="up upinbody" style="background-color:#00e699"><i class="material-icons material-up">vertical_align_top</i></div></a>
 
 
-<p >Copyright ©  2017  慕斯抗真菌</p>
-<p >Powered by <a href="https://hexo.io/" target="_blank"> Hexo </a> & Theme - <a href="https://github.com/moumao/hexo-theme-Vateral" target="_blank">Vateral</a></p>
+<p >Copyright ©  2018  慕斯抗真菌</p>
 <p style="font-size: 10px" id="footer-times" data-time="4/4/2018"></p>
 <script>
     var beginTime=document.getElementById("footer-times").dataset.time

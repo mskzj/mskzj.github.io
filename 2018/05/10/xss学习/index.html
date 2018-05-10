@@ -90,64 +90,82 @@
 <div id="content-outer">
   <div id="content-inner">
     
+<article id="post">
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-3.png)" >
+  <h2>xss学习</h2>
+    
+  <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-05-10T13:19:07.000Z">
+          2018-05-10
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>构造xss有三大对手：正则，转义，标记</p>
+<hr>
+<h3 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理:"></a>攻击原理:</h3><p>1.将带有xss的HTTP链接给用户（或该网页已被xss攻击，形成特有漏洞页面），用户登陆时网站执行xss脚本，攻击者获取用户信息（cookie等）<br>2.构造xss跨站漏洞页面<br><img src="http://upload-images.jianshu.io/upload_images/9233083-307cd6c96c65bed9.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xss分类"><br>3.<em>基本套路：</em></p>
+<pre><code>&lt;script&gt;alert(xss)&lt;/script&gt;                 //正面直接刚
+&lt;img src=&quot; &quot;  onerror=&quot;&quot;&gt;                  //onerror事件
+“&gt;&lt;...........&gt;&lt;&quot;                            //闭合前后标签
+</code></pre><h3 id="关键词过滤："><a href="#关键词过滤：" class="headerlink" title="关键词过滤："></a>关键词过滤：</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">关键词</th>
+<th style="text-align:center">过滤手段</th>
+<th style="text-align:center">绕过方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">script</td>
+<td style="text-align:center">过滤小写</td>
+<td style="text-align:center">大小写混写script</td>
+</tr>
+<tr>
+<td style="text-align:left">script</td>
+<td style="text-align:center">过滤大小写</td>
+<td style="text-align:center">嵌套script标签绕过：<code>&lt;scr&lt;script&gt;ipt&gt;&lt;/scr&lt;script&gt;ipt&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">script</td>
+<td style="text-align:center">含有script关键词直接die</td>
+<td style="text-align:center">用img标签的onerror报错执行脚本</td>
+</tr>
+<tr>
+<td style="text-align:left">alert(‘xss’)</td>
+<td style="text-align:center">编码绕过</td>
+<td style="text-align:center">eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 120, 115, 115, 39, 41))</td>
+</tr>
+</tbody>
+</table>
+<p><em>eval是js的预定义函数</em></p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
 
 
-<div class="tags">
-  
-</div>
-
-<div id="recent-posts">
-  
-      <div class="recent-post-item lazy" style="background-color:#00e699"  data-original="/images/random/vateral-11.png"  >
-        <a class="recent-post-link" href="/2018/02/18/sqli-labs-练习笔记/">
-        <div class="post-hover">
-          <!--title-->
-          <p class="post-title"><a href="/2018/02/18/sqli-labs-练习笔记/" >sqli_labs 练习笔记</a></p>
-
-          <!--date-->
-          
-            <p class="post-time"> &nbsp &nbsp 发布于:<time datetime="2018-02-17T16:00:00.000Z">
-              2018-02-18
-            </time>
-            </p>
-          
-
-          <!--tags-->
-
-          标签:
-            
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a></li></ul>
-            
-          <!--分类-->
-
-          分类:
-            
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web安全/">web安全</a></li></ul>
-            
-
-          <!--excerpt-->
-          <div class="post-excerpt">
-            <p>
-              摘要：
-              
-                &emsp;&emsp;sqli_labs这个神奇的练习sql注入的地方真的挺不错的，小白的靶场。在练习之前，去看看PHP和sql的查询语句能使练习事半功倍。&emsp;&emsp;话不多说,开始愉快的练习之旅(ง •_•)ง这里贴一个学习链接
-              
-            </p>
-          </div>
-          <div class="post-more"><a href="/2018/02/18/sqli-labs-练习笔记/" >全文阅读</a></div>
-        </div>
-        </a>
-      </div>
-  
-  <nav class="paging">
-    <span class="page-number current">1</span>
+  <!-- Next Nav -->
+    
+  <a href="/2018/05/09/可爱的段誉/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
 </nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#攻击原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">攻击原理:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关键词过滤："><span class="post-toc-number">2.</span> <span class="post-toc-text">关键词过滤：</span></a></li></ol>
 </div>
-
-
-
-
-
+<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
+<script type="text/javascript">
+    menu();
+</script>
   </div>
 </div>
 <div id="bottom-outer">
