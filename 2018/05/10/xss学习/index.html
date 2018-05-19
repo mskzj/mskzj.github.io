@@ -119,8 +119,8 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-7.png)" >
-  <h2>关于xss不得不说的事</h2>
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-11.png)" >
+  <h2>xss学习</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-05-10T13:19:07.000Z">
           2018-05-10
@@ -154,11 +154,23 @@ background-image:url(javascript:........)      //这个style很不一样哦
 <tr>
 <td style="text-align:left">script</td>
 <td style="text-align:center">过滤大小写</td>
-<td style="text-align:center">嵌套script标签绕过：<figure class="highlight plain"><figcaption><span>scr<script>ipt>```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">|script| 含有script关键词直接die|用img标签的onerror报错执行脚本</span><br><span class="line">|alert(&apos;xss&apos;)|编码绕过|```eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 120, 115, 115, 39, 41))</span><br></pre></td></tr></table></figure></td>
+<td style="text-align:center">嵌套script标签绕过</td>
+</tr>
+<tr>
+<td style="text-align:left">script</td>
+<td style="text-align:center">含有script关键词直接die</td>
+<td style="text-align:center">用img标签的onerror报错执行脚本</td>
+</tr>
+<tr>
+<td style="text-align:left">alert(‘xss’)</td>
+<td style="text-align:center">编码绕过</td>
+<td style="text-align:center"><code>eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 120, 115, 115, 39, 41))</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
 </tr>
 </tbody>
 </table>
-<p>|||</p>
 <p>&emsp;&emsp;JS中的编码还原函数最常用的就是String.fromCharCode了，这个函数用于ascii码的还原，这个函数都要配合EVAL来使用才有效果。<br>这个的使用原理是先编码绕过过滤然后再还原</p>
 <h3 id="其三-emsp-字符编码"><a href="#其三-emsp-字符编码" class="headerlink" title="其三 &emsp;字符编码"></a>其三 &emsp;字符编码</h3><p>&emsp;&emsp;之前看各种xss的注入姿势就对字符编码产生了超级大的疑惑，留下不学无术的眼泪。一下就是我的问题：</p>
 <ul>
@@ -166,8 +178,8 @@ background-image:url(javascript:........)      //这个style很不一样哦
 <li>什么时候能用，什么时候不能用(╯▔皿▔)╯</li>
 <li>哪些位置要用哪些编码</li>
 </ul>
-<p>知道我看见了乌云镜像的这篇文,茅塞顿开<br><a href="http://http://su.xmd5.org/static/drops/tips-689.html">嘿嘿嘿</a></p>
-</script></span></figcaption></figure></td></tr></tbody></table>
+<p>知道我看见了乌云镜像的这篇文,茅塞顿开<br><a href="http://http://su.xmd5.org/static/drops/tips-689.html" target="_blank" rel="noopener">嘿嘿嘿</a></p>
+
   </div>
   <!--评论块-->
     
@@ -188,7 +200,7 @@ background-image:url(javascript:........)      //这个style很不一样哦
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其一-emsp-攻击原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">其一   攻击原理:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其二-emsp-关键词过滤："><span class="post-toc-number">2.</span> <span class="post-toc-text">其二  关键词过滤：</span></a></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其一-emsp-攻击原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">其一   攻击原理:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其二-emsp-关键词过滤："><span class="post-toc-number">2.</span> <span class="post-toc-text">其二  关键词过滤：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其三-emsp-字符编码"><span class="post-toc-number">3.</span> <span class="post-toc-text">其三  字符编码</span></a></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
