@@ -131,8 +131,7 @@
   <div class="post-page-content">
   <p>构造xss有三大对手：正则，转义，标记</p>
 <hr>
-<p>###其一 &emsp; 攻击原理:</p>
-<p>1.将带有xss的HTTP链接给用户（或该网页已被xss攻击，形成特有漏洞页面），用户登陆时网站执行xss脚本，攻击者获取用户信息（cookie等）</p>
+<h3 id="其一-emsp-攻击原理"><a href="#其一-emsp-攻击原理" class="headerlink" title="其一 &emsp; 攻击原理:"></a>其一 &emsp; 攻击原理:</h3><p>1.将带有xss的HTTP链接给用户（或该网页已被xss攻击，形成特有漏洞页面），用户登陆时网站执行xss脚本，攻击者获取用户信息（cookie等）</p>
 <p>2.构造xss跨站漏洞页面<br><img src="http://upload-images.jianshu.io/upload_images/9233083-307cd6c96c65bed9.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xss分类"><br>3.<em>基本套路：</em></p>
 <pre><code>&lt;script&gt;alert(xss)&lt;/script&gt;                 //正面直接刚
 &lt;img src=&quot; &quot;  onerror=&quot;&quot;&gt;                  //onerror事件
@@ -161,7 +160,7 @@ background-image:url(javascript:........)      //这个style很不一样哦
 </table>
 <p>|||</p>
 <p>&emsp;&emsp;JS中的编码还原函数最常用的就是String.fromCharCode了，这个函数用于ascii码的还原，这个函数都要配合EVAL来使用才有效果。<br>这个的使用原理是先编码绕过过滤然后再还原</p>
-<h3 id="其三-emsp-字符编码"><a href="#其三-emsp-字符编码" class="headerlink" title="其三&emsp;字符编码"></a>其三&emsp;字符编码</h3><p>&emsp;&emsp;之前看各种xss的注入姿势就对字符编码产生了超级大的疑惑，留下不学无术的眼泪。一下就是我的问题：</p>
+<h3 id="其三-emsp-字符编码"><a href="#其三-emsp-字符编码" class="headerlink" title="其三 &emsp;字符编码"></a>其三 &emsp;字符编码</h3><p>&emsp;&emsp;之前看各种xss的注入姿势就对字符编码产生了超级大的疑惑，留下不学无术的眼泪。一下就是我的问题：</p>
 <ul>
 <li>url编码，ASCII这些都是什么鬼</li>
 <li>什么时候能用，什么时候不能用(╯▔皿▔)╯</li>
@@ -189,7 +188,7 @@ background-image:url(javascript:........)      //这个style很不一样哦
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其二-emsp-关键词过滤："><span class="post-toc-number">1.</span> <span class="post-toc-text">其二  关键词过滤：</span></a></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其一-emsp-攻击原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">其一   攻击原理:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其二-emsp-关键词过滤："><span class="post-toc-number">2.</span> <span class="post-toc-text">其二  关键词过滤：</span></a></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
