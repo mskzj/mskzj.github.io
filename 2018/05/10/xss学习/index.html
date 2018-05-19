@@ -38,7 +38,35 @@
 <div id="menu-outer">
   <div id="menu-inner">
       <ul id="slide-out" class="side-nav" >
-    
+    <div class="nav-header"  style="background-image: url(/images/header-bg.png);background-color:#00e699">
+    <div class="header-box"><img src="/images/明石.jpg" ondragstart="return false;"></div>
+    <p></p>
+    <div class="nav-link">
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box twitter"></div></a>
+        
+        
+        <a href="https://github.com/mskzj" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:mskzj123456@163.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+        <a href="https://www.zhihu.com/people/mu-si-kang-lan-zao/activities" target="_blank"> <div class="link-box zhihu"></div></a>
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
     <!--Homepage-->
 
 <li class="nav-list">
@@ -91,8 +119,8 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-3.png)" >
-  <h2>xss学习</h2>
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-7.png)" >
+  <h2>关于xss不得不说的事</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-05-10T13:19:07.000Z">
           2018-05-10
@@ -103,11 +131,14 @@
   <div class="post-page-content">
   <p>构造xss有三大对手：正则，转义，标记</p>
 <hr>
-<h3 id="攻击原理"><a href="#攻击原理" class="headerlink" title="攻击原理:"></a>攻击原理:</h3><p>1.将带有xss的HTTP链接给用户（或该网页已被xss攻击，形成特有漏洞页面），用户登陆时网站执行xss脚本，攻击者获取用户信息（cookie等）<br>2.构造xss跨站漏洞页面<br><img src="http://upload-images.jianshu.io/upload_images/9233083-307cd6c96c65bed9.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xss分类"><br>3.<em>基本套路：</em></p>
+<p>###其一 &emsp; 攻击原理:</p>
+<p>1.将带有xss的HTTP链接给用户（或该网页已被xss攻击，形成特有漏洞页面），用户登陆时网站执行xss脚本，攻击者获取用户信息（cookie等）</p>
+<p>2.构造xss跨站漏洞页面<br><img src="http://upload-images.jianshu.io/upload_images/9233083-307cd6c96c65bed9.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xss分类"><br>3.<em>基本套路：</em></p>
 <pre><code>&lt;script&gt;alert(xss)&lt;/script&gt;                 //正面直接刚
 &lt;img src=&quot; &quot;  onerror=&quot;&quot;&gt;                  //onerror事件
 “&gt;&lt;...........&gt;&lt;&quot;                            //闭合前后标签
-</code></pre><h3 id="关键词过滤："><a href="#关键词过滤：" class="headerlink" title="关键词过滤："></a>关键词过滤：</h3><table>
+background-image:url(javascript:........)      //这个style很不一样哦
+</code></pre><h3 id="其二-emsp-关键词过滤："><a href="#其二-emsp-关键词过滤：" class="headerlink" title="其二 &emsp;关键词过滤："></a>其二 &emsp;关键词过滤：</h3><table>
 <thead>
 <tr>
 <th style="text-align:left">关键词</th>
@@ -124,22 +155,20 @@
 <tr>
 <td style="text-align:left">script</td>
 <td style="text-align:center">过滤大小写</td>
-<td style="text-align:center">嵌套script标签绕过：<code>&lt;scr&lt;script&gt;ipt&gt;&lt;/scr&lt;script&gt;ipt&gt;</code></td>
-</tr>
-<tr>
-<td style="text-align:left">script</td>
-<td style="text-align:center">含有script关键词直接die</td>
-<td style="text-align:center">用img标签的onerror报错执行脚本</td>
-</tr>
-<tr>
-<td style="text-align:left">alert(‘xss’)</td>
-<td style="text-align:center">编码绕过</td>
-<td style="text-align:center">eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 120, 115, 115, 39, 41))</td>
+<td style="text-align:center">嵌套script标签绕过：<figure class="highlight plain"><figcaption><span>scr<script>ipt>```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">|script| 含有script关键词直接die|用img标签的onerror报错执行脚本</span><br><span class="line">|alert(&apos;xss&apos;)|编码绕过|```eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 120, 115, 115, 39, 41))</span><br></pre></td></tr></table></figure></td>
 </tr>
 </tbody>
 </table>
-<p><em>eval是js的预定义函数</em></p>
-
+<p>|||</p>
+<p>&emsp;&emsp;JS中的编码还原函数最常用的就是String.fromCharCode了，这个函数用于ascii码的还原，这个函数都要配合EVAL来使用才有效果。<br>这个的使用原理是先编码绕过过滤然后再还原</p>
+<h3 id="其三-emsp-字符编码"><a href="#其三-emsp-字符编码" class="headerlink" title="其三&emsp;字符编码"></a>其三&emsp;字符编码</h3><p>&emsp;&emsp;之前看各种xss的注入姿势就对字符编码产生了超级大的疑惑，留下不学无术的眼泪。一下就是我的问题：</p>
+<ul>
+<li>url编码，ASCII这些都是什么鬼</li>
+<li>什么时候能用，什么时候不能用(╯▔皿▔)╯</li>
+<li>哪些位置要用哪些编码</li>
+</ul>
+<p>知道我看见了乌云镜像的这篇文,茅塞顿开<br><a href="http://http://su.xmd5.org/static/drops/tips-689.html">嘿嘿嘿</a></p>
+</script></span></figcaption></figure></td></tr></tbody></table>
   </div>
   <!--评论块-->
     
@@ -160,7 +189,7 @@
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#攻击原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">攻击原理:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关键词过滤："><span class="post-toc-number">2.</span> <span class="post-toc-text">关键词过滤：</span></a></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其二-emsp-关键词过滤："><span class="post-toc-number">1.</span> <span class="post-toc-text">其二  关键词过滤：</span></a></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">

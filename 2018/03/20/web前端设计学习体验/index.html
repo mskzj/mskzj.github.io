@@ -38,7 +38,35 @@
 <div id="menu-outer">
   <div id="menu-inner">
       <ul id="slide-out" class="side-nav" >
-    
+    <div class="nav-header"  style="background-image: url(/images/header-bg.png);background-color:#00e699">
+    <div class="header-box"><img src="/images/明石.jpg" ondragstart="return false;"></div>
+    <p></p>
+    <div class="nav-link">
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box twitter"></div></a>
+        
+        
+        <a href="https://github.com/mskzj" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:mskzj123456@163.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+        <a href="https://www.zhihu.com/people/mu-si-kang-lan-zao/activities" target="_blank"> <div class="link-box zhihu"></div></a>
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
     <!--Homepage-->
 
 <li class="nav-list">
@@ -91,7 +119,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-17.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-16.png)" >
   <h2>web前端设计学习体验 </h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-03-19T16:00:00.000Z">
@@ -110,7 +138,7 @@
 </code></pre><p>这个查询语言也很好记，就是说在screen宽度在多少的时候我们要显示什么样的css，这样做的话就可在一个css文件里放不同显屏时的不同样式了<br><strong>多个外联式css文件</strong></p>
 <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;css文件&quot; media=&quot;only screen and (min-width:400px)&quot;&gt;
 </code></pre><p>这里的media用于判断什么时候用啥css文件</p>
-<h3 id="div"><a href="#div" class="headerlink" title="div"></a>div</h3><p>&emsp;&emsp;对于一段内容来说他可能需要一个地方来安放他，这就可以时我们的div来做这个事。它像一个盒子一样吞吐标签，很大程度上能解决标签的位置等问题</p>
+<h3 id="div"><a href="#div" class="headerlink" title="div"></a>div</h3><p>&emsp;&emsp;对于一段内容来说他可能需要一个地方来安放他，这就可以时我们的div来做这个事。它像一个盒子一样吞吐标签，很大程度上能解决标签的位置等问题<br>&emsp;&emsp;关于这里不得不说一句，父元素最好要有宽高，好放置子元素</p>
 <h3 id="居中的奇淫技巧"><a href="#居中的奇淫技巧" class="headerlink" title="居中的奇淫技巧"></a>居中的奇淫技巧</h3><p>老实说居中问题在刚开始时常让我头秃。<br><strong>body居中</strong><br>整体的内容居中而不用class怎么搞，不如来设置body的最大宽度</p>
 <pre><code>body{
               max-width: 1200px;
@@ -125,6 +153,30 @@ left: ; right:;                          //左右百分比自行根据网页设�
 </code></pre><h3 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h3><p>&emsp;&emsp;浮动的设置能让网页内容更加直观，视觉效果更好。比如让一个图片被文字环绕，若单纯设置绝对位置，很有可能出现图被文字挤到下一行的情况。但用浮动（对图片）配上最大宽度（对文本使用）会让一切很和谐，比如说这个例子<br><img src="https://upload-images.jianshu.io/upload_images/9233083-cfb85986d7a1c0e1.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="float"><br>然而浮动往往会影响下一个标签，这并非吾等所愿意看见的。</p>
 <pre><code>clear:all;                 //清除上一个标签的浮动效果
 </code></pre><h3 id="max-width"><a href="#max-width" class="headerlink" title="max-width"></a>max-width</h3><p>&emsp;&emsp;这个语句时用来限制我们标签的宽度的，画地为牢，让标签里的东东能够安分的呆在那里面。<br>&emsp;&emsp;讲真，用max-width来让两个标签里的内容能够并排到一起十分的方便</p>
+<hr>
+<p>####2018.5.16 更新<br>&emsp;&emsp;不知不觉已经学习HTML，css有两个月多了。越往下学习，好的习惯真的很重要</p>
+<p>###小贴士1：</p>
+<p>&emsp;&emsp;对把各种标签混在一起说NO，拥抱简介明了的分类。</p>
+<p>&emsp;&emsp;比如说常用的ul，li标签就像爸爸和儿子的关系一样，一个爸爸可以有很多儿子，但一个儿子不能有很多爸爸，不然你的样式就会像狗血剧演的一样让你到后面越来越揪心。</p>
+<p>###小贴士2：<br>&emsp;&emsp;万万没有想到我还可以这样操作。</p>
+<p>&emsp;&emsp;对可加性的内容，一定不要定死了。以下都是不错的写法（以高度为示例）</p>
+<pre><code>max-height：；
+min-height：；  //限制最大，最小的高度，让其可以有伸缩空间
+height：100%；  //针对于一个容器里高度的限制条件或许百分比是个不错的选择呢
+</code></pre><p>###小贴士3：<br>&emsp;&emsp;直接对标签进行样式设置，不如直接给他一个class.</p>
+<p>&emsp;&emsp;有时候你会发现在一个div中你已经给定一个标签的样式</p>
+<pre><code>.example a{
+    color:green; 
+ }
+</code></pre><p>但是有个性的你并不想要每一个a标签都被绿，但是直接进行css添加不OK。有一种解决办法是直接在HTML里直接对不被绿的a标签进行style设置，但是这样写不利于管理和更改。那么不如直接给需要绿的a的标签给定css类</p>
+<pre><code>#css部分
+.a_green{
+    color:green; 
+}
+#HTML部分
+&lt;a class=&quot;a_green&quot;&gt;...&lt;/a&gt;
+</code></pre><p>&emsp;&emsp;<strong>千万不要懒！</strong></p>
+<p>###划重点啦<br>&emsp;&emsp;人生苦短，不要浪费时间在反复修改上。最好从一开始就对写法有个清晰的认识和选择。 </p>
 
   </div>
   <!--评论块-->
