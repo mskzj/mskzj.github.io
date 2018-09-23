@@ -117,99 +117,103 @@
 
 <div id="content-outer">
   <div id="content-inner">
-    <div id="tag">
-    <div id="recent-posts">
-  
-      <div class="recent-post-item lazy" style="background-color:#00e699"  data-original="/images/random/vateral-9.png"  >
-        <a class="recent-post-link" href="/2018/04/09/sql注入笔记/">
-        <div class="post-hover">
-          <!--title-->
-          <p class="post-title"><a href="/2018/04/09/sql注入笔记/" >sql注入笔记</a></p>
+    
+<article id="post">
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-11.png)" >
+  <h2>tcp，udp简单编程</h2>
+    
+  <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-09-23T15:25:09.000Z">
+          2018-09-23
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <p>###了解TCP,UDP</p>
+<hr>
+<p><em>UDP：使用IP地址和端口号进行标识，从此将数据包发送至目标地址</em></p>
+<p><em>TCP：基于字节流的传输层通信协议</em></p>
+<hr>
+<p>###初识套接字<br>&emsp;&emsp;套接字用（IP地址：端口号）表示。在python中使用socket.socket对象来方便的表示套接字。该对象内部维护了操作系统标识套接字的整数。</p>
+<p>##再识socket.socket对象<br>&emsp;&emsp;在有了套接字后，我们开始继续了解socket.socket对象。就像传统的寄信一样，除了要知道我们递送信息的地址，还要有信息的实体的内容，发送和接收信息的动作。而这一切都可以通过操作这个对象来完成。</p>
+<p><strong>首先是发送信息</strong></p>
+<pre><code>sock.sendto(data,address)    
+</code></pre><p><strong>然后是接收信息</strong></p>
+<pre><code>data,address = sock.recvform()
+</code></pre><p>##UDP<br>下面是一个简单的回复客户端发送字符长度的服务器端。</p>
+<pre><code>def server(interface,port):
+      sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+      sock.bind((interface, port))  #绑定接口等
+      print(&apos;Listening at {}&apos;.format(sock.getsockname())) 
+      while True:      #不断接收信息
+           data, address = sock.recvfrom(MAX_BYTES)
+           if random.random() &lt; 0.5:
+            print(&apos;pretending drop&apos;)
+            continue                  #模拟丢包
+            text = data.decode(&apos;ascii&apos;)
+            print(&apos;The client at {} says {!r}&apos;.format(address, text))      #打印客户端说了啥
+            text = &apos;Your data was {} bytes long&apos;.format(len(data))
+            data = text.encode(&apos;ascii&apos;)
+            sock.sendto(data, address) #发送信息 
+</code></pre><p>首先我们注意到的是<strong>socket.socket</strong>本身也有很多参数，地址族，套接字类型。感觉有点麻烦啊，然而实际的编程过程中是不会出现像AF_INET等真实的符号。而是可以使用一个强大的工具<strong>getaddrinfo()</strong>来操作涉及地址的工作。比如说</p>
+<pre><code>infolist = socket.getaddrinfo(&apos;127.0.0.1&apos;,&apos;smtp&apos;,0,socket.SOCK_STREAM,0)
+</code></pre><p>得到的infolist是一个元组列表，可以通过操作这个列表得到我们目标的所要构造socket.socket的参数。</p>
+<hr>
+<p>&emsp;&emsp;客户端的写法和服务器端类似就不再赘述了。客户端最重要的是进行异常处理，比如丢包和服务器端识别。丢包处理我们可能会很自然的想到超过一定时间没有收到回复就放弃等待或者是重新发送。然而面对判断发送信息方的真实身份时，udp协议就不太好使了。</p>
+<p>&emsp;&emsp;可以看到的是这样的写法可以是任何人都可以发送给服务器端，相似的任何人也可以构造数据包来发送给客户端。在服务器端响应信息之前，第三方构造的信息发送到了客户端，如果没有判断是否是真正的服务器端发送的信息，可能就会把第三方的信息当作是服务器的响应信息了。<br><strong>处理这种问题比较自然的想法是直接判断响应方的IP和发送目的方的IP是否相等</strong>，然而事情并没有这样简单，伪造数据包可以成功通过这样的地址检测</p>
+<p>##TCP</p>
+<p><strong>又是套接字：</strong></p>
+<p>tcp实际上包含了两种不同的套接字，“被动”监听套接字，“主动”连接套接字。顾名思义，一个拿来的监听，一个拿来连接。为什么tcp的事情这么多呢？因为tcp基于字节流的传输层通信协议。监听套接字用来维护“套接字名”，指示操作系统首先使用哪个特定的tcp端口号来接收请求连接。</p>
+<pre><code>def server(interface, port):
+    sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    sock.bind((interface, port))
+    sock.listen(1)    #监听，参数是指等待连接的最大数
+    print(&apos;listening at :&apos;,sock.getsockname())
+    while True:
+          print(&apos;Waiting to accept a new connection&apos;)
+          sc,sockname = sock.accept()  #等待客户端，然后返回新的连接套接字sc
+          print(&apos;We have accepted a connection from&apos;, sockname)
+          message = recv(sc)
+          print(&apos;client says:&apos;, repr(message))
+          sc.sendall(b&apos;Farewell, client&apos;)
+          sc.close()   #关闭连接
+           print(&apos;reply sent,closed&apos;)
+</code></pre><p>客户端</p>
+<pre><code>def client(host,port):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.connect((host,port))  #连接服务器端
+    print(&apos;Client has been assigned socket name&apos;, sock.getsockname())
+    sock.sendall(b&apos;Hi there, server&apos;)
+    reply = recv(sock)
+    print(&apos;server reply:&apos;, repr(reply))
+    sock.close()
+</code></pre>
+  </div>
+  <!--评论块-->
+    
 
-          <!--date-->
-          
-            <p class="post-time"> &nbsp &nbsp 发布于:<time datetime="2018-04-09T15:24:44.000Z">
-              2018-04-09
-            </time>
-            </p>
-          
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
 
-          <!--tags-->
 
-          标签:
-            
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a></li></ul>
-            
-          <!--分类-->
-
-          分类:
-            
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web安全/">web安全</a></li></ul>
-            
-
-          <!--excerpt-->
-          <div class="post-excerpt">
-            <p>
-              摘要：
-              
-                sql注入笔记先来一波理论知识
-
-              
-            </p>
-          </div>
-          <div class="post-more"><a href="/2018/04/09/sql注入笔记/" >全文阅读</a></div>
-        </div>
-        </a>
-      </div>
-  
-      <div class="recent-post-item lazy" style="background-color:#00e699"  data-original="/images/random/vateral-15.png"  >
-        <a class="recent-post-link" href="/2018/02/18/sqli-labs-练习笔记/">
-        <div class="post-hover">
-          <!--title-->
-          <p class="post-title"><a href="/2018/02/18/sqli-labs-练习笔记/" >sqli_labs 练习笔记</a></p>
-
-          <!--date-->
-          
-            <p class="post-time"> &nbsp &nbsp 发布于:<time datetime="2018-02-17T16:00:00.000Z">
-              2018-02-18
-            </time>
-            </p>
-          
-
-          <!--tags-->
-
-          标签:
-            
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql注入/">sql注入</a></li></ul>
-            
-          <!--分类-->
-
-          分类:
-            
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/web安全/">web安全</a></li></ul>
-            
-
-          <!--excerpt-->
-          <div class="post-excerpt">
-            <p>
-              摘要：
-              
-                &emsp;&emsp;sqli_labs这个神奇的练习sql注入的地方真的挺不错的，小白的靶场。在练习之前，去看看PHP和sql的查询语句能使练习事半功倍。&emsp;&emsp;话不多说,开始愉快的练习之旅(ง •_•)ง这里贴一个学习链接
-              
-            </p>
-          </div>
-          <div class="post-more"><a href="/2018/02/18/sqli-labs-练习笔记/" >全文阅读</a></div>
-        </div>
-        </a>
-      </div>
-  
-  <nav class="paging">
-    <span class="page-number current">1</span>
+  <!-- Next Nav -->
+    
+  <a href="/2018/05/10/xss学习/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
 </nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    
 </div>
-
-
-</div>
+<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
+<script type="text/javascript">
+    menu();
+</script>
   </div>
 </div>
 <div id="bottom-outer">

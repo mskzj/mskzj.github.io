@@ -85,14 +85,14 @@
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+        <a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
     </li>
 </ul>
 <!--categories-->
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a>
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a>
     </li>
 </ul>
 <!--tags-->
@@ -119,7 +119,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-11.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-16.png)" >
   <h2>xss学习</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-05-10T13:19:07.000Z">
@@ -162,23 +162,45 @@ background-image:url(javascript:........)      //这个style很不一样哦
 <td style="text-align:center">用img标签的onerror报错执行脚本</td>
 </tr>
 <tr>
+<td style="text-align:left">script</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">ſcript这个词居然可以解析成script，然后绕过script的过滤</td>
+</tr>
+<tr>
 <td style="text-align:left">alert(‘xss’)</td>
 <td style="text-align:center">编码绕过</td>
 <td style="text-align:center"><code>eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 120, 115, 115, 39, 41))</code></td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
 </tr>
 </tbody>
 </table>
 <p>&emsp;&emsp;JS中的编码还原函数最常用的就是String.fromCharCode了，这个函数用于ascii码的还原，这个函数都要配合EVAL来使用才有效果。<br>这个的使用原理是先编码绕过过滤然后再还原</p>
 <h3 id="其三-emsp-字符编码"><a href="#其三-emsp-字符编码" class="headerlink" title="其三 &emsp;字符编码"></a>其三 &emsp;字符编码</h3><p>&emsp;&emsp;之前看各种xss的注入姿势就对字符编码产生了超级大的疑惑，留下不学无术的眼泪。一下就是我的问题：</p>
-<ul>
+<ol>
 <li>url编码，ASCII这些都是什么鬼</li>
 <li>什么时候能用，什么时候不能用(╯▔皿▔)╯</li>
 <li>哪些位置要用哪些编码</li>
-</ul>
-<p>知道我看见了乌云镜像的这篇文,茅塞顿开<br><a href="http://http://su.xmd5.org/static/drops/tips-689.html" target="_blank" rel="noopener">嘿嘿嘿</a></p>
+</ol>
+<hr>
+<p>主要的编码：</p>
+<ol>
+<li>url编码</li>
+</ol>
+<p>&emsp;&emsp;url编码是给浏览器解析用的</p>
+<ol start="2">
+<li>Unicode编码</li>
+<li>HTML编码</li>
+</ol>
+<p>&emsp;&emsp;html实体编码本身存在的意义是防止与HTML本身语义标记的冲突<strong>。html标签中识别html实体编码，并且会在html页面加载时会对编码进行解码</strong>。而使用这个编码的目的是为了在构造html标签，（<strong>浏览器是不会在html标签里解析js中的那些编码</strong>）<br>编码过后</p>
+<pre><code>&lt;img src=&quot;x&quot; onerror=&quot;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#49;&amp;#41;&quot;&gt;
+</code></pre><p>原code：</p>
+<pre><code>&lt;img src=&quot;x&quot; onerror=&quot;alert(1)&quot;&gt;
+</code></pre><p>除此之外，换行符也可以帮助绕过一些字符如：javascript过滤，可以用<code>javasc&amp;NewLine;ript</code>绕过</p>
+<pre><code>&amp;colon; =&gt; [冒号]
+&amp;NewLine; =&gt; [换行]
+</code></pre><p>不要怀疑这样有没得用，浏览器中的解析器中词法分析器起的作用会跳过空白跟换行之类的无效字符。</p>
+<ol start="4">
+<li>base64编码</li>
+</ol>
 
   </div>
   <!--评论块-->
@@ -187,6 +209,10 @@ background-image:url(javascript:........)      //这个style很不一样哦
 </article>
 <nav class="post-nav">
   <!-- Prev Nav -->
+    
+  <a href="/2018/09/23/tcp，udp简单编程/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
     
 
 
