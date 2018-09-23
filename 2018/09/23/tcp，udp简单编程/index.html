@@ -119,7 +119,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-3.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-2.png)" >
   <h2>tcp，udp简单编程</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-09-23T15:25:09.000Z">
@@ -129,18 +129,17 @@
     
   </div>
   <div class="post-page-content">
-  <p>###了解TCP,UDP</p>
-<hr>
+  <h3 id="了解TCP-UDP"><a href="#了解TCP-UDP" class="headerlink" title="了解TCP,UDP"></a>了解TCP,UDP</h3><hr>
 <p><em>UDP：使用IP地址和端口号进行标识，从此将数据包发送至目标地址</em></p>
 <p><em>TCP：基于字节流的传输层通信协议</em></p>
 <hr>
-<p>###初识套接字<br>&emsp;&emsp;套接字用（IP地址：端口号）表示。在python中使用socket.socket对象来方便的表示套接字。该对象内部维护了操作系统标识套接字的整数。</p>
-<p>##再识socket.socket对象<br>&emsp;&emsp;在有了套接字后，我们开始继续了解socket.socket对象。就像传统的寄信一样，除了要知道我们递送信息的地址，还要有信息的实体的内容，发送和接收信息的动作。而这一切都可以通过操作这个对象来完成。</p>
+<h3 id="初识套接字"><a href="#初识套接字" class="headerlink" title="初识套接字"></a>初识套接字</h3><p>&emsp;&emsp;套接字用（IP地址：端口号）表示。在python中使用socket.socket对象来方便的表示套接字。该对象内部维护了操作系统标识套接字的整数。</p>
+<h2 id="再识socket-socket对象"><a href="#再识socket-socket对象" class="headerlink" title="再识socket.socket对象"></a>再识socket.socket对象</h2><p>&emsp;&emsp;在有了套接字后，我们开始继续了解socket.socket对象。就像传统的寄信一样，除了要知道我们递送信息的地址，还要有信息的实体的内容，发送和接收信息的动作。而这一切都可以通过操作这个对象来完成。</p>
 <p><strong>首先是发送信息</strong></p>
 <pre><code>sock.sendto(data,address)    
 </code></pre><p><strong>然后是接收信息</strong></p>
 <pre><code>data,address = sock.recvform()
-</code></pre><p>##UDP<br>下面是一个简单的回复客户端发送字符长度的服务器端。</p>
+</code></pre><h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><p>下面是一个简单的回复客户端发送字符长度的服务器端。</p>
 <pre><code>def server(interface,port):
       sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
       sock.bind((interface, port))  #绑定接口等
@@ -161,8 +160,7 @@
 <hr>
 <p>&emsp;&emsp;客户端的写法和服务器端类似就不再赘述了。客户端最重要的是进行异常处理，比如丢包和服务器端识别。丢包处理我们可能会很自然的想到超过一定时间没有收到回复就放弃等待或者是重新发送。然而面对判断发送信息方的真实身份时，udp协议就不太好使了。</p>
 <p>&emsp;&emsp;可以看到的是这样的写法可以是任何人都可以发送给服务器端，相似的任何人也可以构造数据包来发送给客户端。在服务器端响应信息之前，第三方构造的信息发送到了客户端，如果没有判断是否是真正的服务器端发送的信息，可能就会把第三方的信息当作是服务器的响应信息了。<br><strong>处理这种问题比较自然的想法是直接判断响应方的IP和发送目的方的IP是否相等</strong>，然而事情并没有这样简单，伪造数据包可以成功通过这样的地址检测</p>
-<p>##TCP</p>
-<p><strong>又是套接字：</strong></p>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><p><strong>又是套接字：</strong></p>
 <p>tcp实际上包含了两种不同的套接字，“被动”监听套接字，“主动”连接套接字。顾名思义，一个拿来的监听，一个拿来连接。为什么tcp的事情这么多呢？因为tcp基于字节流的传输层通信协议。监听套接字用来维护“套接字名”，指示操作系统首先使用哪个特定的tcp端口号来接收请求连接。</p>
 <pre><code>def server(interface, port):
     sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -208,7 +206,7 @@
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#了解TCP-UDP"><span class="post-toc-number">1.</span> <span class="post-toc-text">了解TCP,UDP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初识套接字"><span class="post-toc-number">2.</span> <span class="post-toc-text">初识套接字</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#再识socket-socket对象"><span class="post-toc-number"></span> <span class="post-toc-text">再识socket.socket对象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UDP"><span class="post-toc-number"></span> <span class="post-toc-text">UDP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP"><span class="post-toc-number"></span> <span class="post-toc-text">TCP</span></a>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
