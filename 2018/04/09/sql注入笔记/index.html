@@ -85,14 +85,14 @@
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">3</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
     </li>
 </ul>
 <!--categories-->
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a>
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">5</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
     </li>
 </ul>
 <!--tags-->
@@ -119,7 +119,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-6.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-14.png)" >
   <h2>sql注入笔记</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-04-09T15:24:44.000Z">
@@ -129,7 +129,16 @@
     
   </div>
   <div class="post-page-content">
-  <h1 id="sql注入笔记"><a href="#sql注入笔记" class="headerlink" title="sql注入笔记"></a>sql注入笔记</h1><p>先来一波理论知识</p>
+  <h1 id="sql注入笔记"><a href="#sql注入笔记" class="headerlink" title="sql注入笔记"></a>sql注入笔记</h1><p>在基本刷完sqlibs后对sql注入有了新的认识，我们在面对一个注入点要考虑的问题主要有：</p>
+<ol>
+<li>确定过滤字符，单词</li>
+<li>思考过滤的方法</li>
+<li>选择注入方式</li>
+</ol>
+<p>2018/11/11更新</p>
+<p>在报错无法回显的情况下，我们就只能利用盲注。盲注的最重要的是选择确定表达式是否正确的方式，延时注入耗时大而且判断不准确。还是异或注入判断回显好用（当然回显易于区分的情况下）。</p>
+<p>这篇笔记全是我整理的干货了。正常情况下更多的还是需要盲注，至于靠编码过waf我至今还没有学过，有空看看</p>
+<hr>
 <h3 id="sql注入分类"><a href="#sql注入分类" class="headerlink" title="sql注入分类"></a>sql注入分类</h3><h4 id="1-按数据类型分："><a href="#1-按数据类型分：" class="headerlink" title="1.按数据类型分："></a>1.按数据类型分：</h4><p> 整形注入：不需要注释符进行闭合<br> 字符型注入：需要单引号等的闭合，并进行注释</p>
 <h4 id="2-按注入语法分类："><a href="#2-按注入语法分类：" class="headerlink" title="2.按注入语法分类："></a>2.按注入语法分类：</h4><p>union(可联合查询)：<br>可使用union语句的情况下的注入<br>error-based（报错型）：<br>页面返回错误信息和结果<br>boolean-based blind（布尔型盲注）：<br>根据返回页面判断条件真假<br>time-based blind（基于时间延迟）：<br>不能根据页面返回内容判断信息，用条件语句查看时间延时语句是否被执行<br>stacked queries（可多语句查询）：<br>多语句一起查询</p>
 <h3 id="常用语句"><a href="#常用语句" class="headerlink" title="常用语句"></a>常用语句</h3><p>payload的位置放的核心语句为：<br>获取数据库信息：</p>
@@ -142,7 +151,24 @@
 <pre><code>concat((select (SELECT distinct concat(0x7e,column_name,0x7e) FROM information_schema.columns where table_name=表名的HEX编码 LIMIT 0,1))
 </code></pre><p>获取指定字段内容：</p>
 <pre><code>concat(((select (select concat(xxx) from xxx limit 1)))
-</code></pre>
+</code></pre><h2 id="MYSQL一些可以注入的点"><a href="#MYSQL一些可以注入的点" class="headerlink" title="MYSQL一些可以注入的点"></a>MYSQL一些可以注入的点</h2><h4 id="异或注入"><a href="#异或注入" class="headerlink" title="异或注入"></a>异或注入</h4><pre><code>expression1^expression2^expression3
+</code></pre><p>根据表达式所返回的布尔值进行异或运算得到的回显来判断表达式是否正确。异或注入在一些场合十分方便例如</p>
+<pre><code>....^(length(select)==0)^0
+</code></pre><p>这个可以准确判断是否过滤了单词select，如过滤了（即第二个表达式的值也为0）,则页面返回正确</p>
+<h4 id="宽字符注入"><a href="#宽字符注入" class="headerlink" title="宽字符注入"></a>宽字符注入</h4><p>有点好用哦,这个利用是编码的特点来过转译，一般转译是在字符前加入”\”来，<br>众所周知”\”的ASCII是”%27”，当在%27前加入%bf得到的字符是%bf%27这就构造流量新的字符，“\”被成功吃掉，我们的字符也就不会被转译了</p>
+<h4 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h4><p>报错注入 ：</p>
+<p><code>union Select 1,count(*),concat(0x3a,0x3a,(select user()),0 x3a,0x3a,floor(rand(0)*2))a from information_schema.columns group by a</code><br>这个原理比较复杂这里是之前学习sqlibs的时候找的比较好的分析的文章<a href="http://www.myhack58.com/Article/html/3/7/2016/73471.htm" target="_blank" rel="noopener">传送们</a></p>
+<p>函数报错注入 ：</p>
+<p><code>and extractvalue(1,concat(0x7e,(select @@version),0x7e))</code></p>
+<p><code>and updatexml(1,concat(&#39;@&#39;,(select @@version)),1)</code><br>这两个报错函数都是利用了xml的路径格式问题，利用了concat将要不符合的路径要求的字符和select子查询拼接以达到报错回显的目的。</p>
+<h4 id="延时注入"><a href="#延时注入" class="headerlink" title="延时注入"></a>延时注入</h4><p>利用 sleep()函数进行注入：<br>1.</p>
+<p><code>and If(ascii(substr(database(),1,1))=115,1,sleep(5))</code></p>
+<p>当错误的时候会有 5 秒的时间延时<br>2.</p>
+<p><code>benchmark(N,expression): N-重复执行次数</code></p>
+<p>这个函数是测试性能的函数，根据表达式执行的次数所耗费的中时间来判断我们的表达式是否执行正确。</p>
+<h4 id="布尔盲注"><a href="#布尔盲注" class="headerlink" title="布尔盲注"></a>布尔盲注</h4><p>判断截断的字符的ASCII值：<br>ascii(substr(database(),1,1))&gt;120         #直接判断<br>ascii(substr(database(),1,1))&amp;128 = 128  #与判断false或者true，</p>
+<p>也是根据页面回显来判断是否正确</p>
+
   </div>
   <!--评论块-->
     
@@ -167,7 +193,7 @@
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sql注入笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">sql注入笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sql注入分类"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">sql注入分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-按数据类型分："><span class="post-toc-number">1.0.1.1.</span> <span class="post-toc-text">1.按数据类型分：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-按注入语法分类："><span class="post-toc-number">1.0.1.2.</span> <span class="post-toc-text">2.按注入语法分类：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用语句"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">常用语句</span></a></li></ol></li></ol></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#sql注入笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">sql注入笔记</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sql注入分类"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">sql注入分类</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-按数据类型分："><span class="post-toc-number">1.0.1.1.</span> <span class="post-toc-text">1.按数据类型分：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-按注入语法分类："><span class="post-toc-number">1.0.1.2.</span> <span class="post-toc-text">2.按注入语法分类：</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#常用语句"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">常用语句</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MYSQL一些可以注入的点"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">MYSQL一些可以注入的点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#异或注入"><span class="post-toc-number">1.1.0.1.</span> <span class="post-toc-text">异或注入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#宽字符注入"><span class="post-toc-number">1.1.0.2.</span> <span class="post-toc-text">宽字符注入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#报错注入"><span class="post-toc-number">1.1.0.3.</span> <span class="post-toc-text">报错注入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#延时注入"><span class="post-toc-number">1.1.0.4.</span> <span class="post-toc-text">延时注入</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#布尔盲注"><span class="post-toc-number">1.1.0.5.</span> <span class="post-toc-text">布尔盲注</span></a></li></ol></li></ol></li></ol></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
