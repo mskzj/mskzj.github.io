@@ -85,14 +85,14 @@
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">3</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">4</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
     </li>
 </ul>
 <!--categories-->
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">5</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">6</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
     </li>
 </ul>
 <!--tags-->
@@ -119,7 +119,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-16.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-6.png)" >
   <h2>脱壳学习日常记录笔记</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-11-06T09:17:34.000Z">
@@ -142,7 +142,53 @@
 <p>直接下断点BP VirtualFree：</p>
 <p>方式1：SHIFT+F9（忽略异常运行   ，取消断点 ）;ALT+F9（ 返回到用户代码段，运行至上层调用的下句）;查找 push 8000(特征码)运行到这单步跟</p>
 <p>方式2：两次SHIFT+F9中断后取消断点，Alt+F9返回单步走。</p>
-<p>后一次异常法：<br>取消所有异常。2次跑飞。找最后一次的前一次的SE句柄转到SE xxxx处，下断点运行。</p>
+<p>后一次异常法：<br>取消所有异常。记录多少次跑飞。找最后一次的前一次的SE句柄转到SE xxxx处，下断点运行。</p>
+<h2 id="2018-11-13"><a href="#2018-11-13" class="headerlink" title="2018/11/13"></a>2018/11/13</h2><p><strong>新修复方法：</strong>当遇到脱壳完不能运行而且用imprec也修复不了时可以用lord_pe的重建pe法修复打入需要修复的文件试试</p>
+<p><strong>新方法—模拟跟踪法：</strong>先用最后一次异常法到SE句柄处下端运行到后，在M窗口找到sfx输入表位置跟踪</p>
+<p><code>tc eip&lt;输入表位置</code></p>
+<p>然后直接到oep</p>
+<h4 id="手脱TELock0-98b1壳"><a href="#手脱TELock0-98b1壳" class="headerlink" title="手脱TELock0.98b1壳"></a>手脱TELock0.98b1壳</h4><p><strong>新修复方法：</strong>当所有的已知方法都死活都不能修复文件的时候，并且有很多无效指针时。使用IR中的trace跟踪无效的指针然后经行修复（这个有多种选择，一是根据trace等级，二是根据每个壳查壳后的特性）</p>
+<p>emmmmmmm，这里比较坑的一点是使用od的时候无法直接跟踪无效指针进行修复。需要在运行程序后进行跟踪。</p>
+<h2 id="2018-11-14"><a href="#2018-11-14" class="headerlink" title="2018/11/14"></a>2018/11/14</h2><h4 id="手脱exe32pack壳"><a href="#手脱exe32pack壳" class="headerlink" title="手脱exe32pack壳"></a>手脱exe32pack壳</h4><p><strong>新方法</strong>—–下断点BP IsDebuggerPresent 运行，取消断点，执行到用户代码ALT+F9，计算此时的ss+edi为OEP！</p>
+<h2 id="2018-11-16"><a href="#2018-11-16" class="headerlink" title="2018/11/16"></a>2018/11/16</h2><h4 id="软件绿化"><a href="#软件绿化" class="headerlink" title="软件绿化"></a>软件绿化</h4><p>开始实战去广告啦！（练习的为吾爱破解网的官方教程）<br>当然去广告之前还是要先脱壳。能修改的都是脱过壳的程序</p>
+<p>四种常见的弹窗口API</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">API名</th>
+<th style="text-align:center">弹窗原理</th>
+<th style="text-align:center">OD堆栈窗口表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>1.MessageBoxA/W</strong></td>
+<td style="text-align:center">消息框</td>
+<td style="text-align:center">MessageBoxA/W</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>2.ShellExecuteA/W</strong></td>
+<td style="text-align:center">控制台执行</td>
+<td style="text-align:center">open url</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>3.WinExec</strong></td>
+<td style="text-align:center">Windows执行</td>
+<td style="text-align:center">explorer.exe url</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>4.CreateProcessA/W</strong></td>
+<td style="text-align:center">创建进程IE</td>
+<td style="text-align:center">PATH url</td>
+</tr>
+</tbody>
+</table>
+<p>其中第一个是弹消息框，其余为弹网页</p>
+<p><strong>去除这些API方法：</strong></p>
+<p>法1： 跟随表达式下断点，运行此处，然后在堆栈窗口第一条回车找到push的参数，然后进行nop填充</p>
+<p>法2：找到这些网页的网址经行00填充</p>
+<p>去除方法的原理很简单就是将参数置为00或指令变为NOP。但是由于有些网址有加密所以不能直接找到对应的网址。</p>
+<p><strong>注意参数的个数和push相对应</strong></p>
 
   </div>
   <!--评论块-->
@@ -168,7 +214,7 @@
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-6之前的笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">2018/11/6之前的笔记</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-6"><span class="post-toc-number">2.</span> <span class="post-toc-text">2018/11/6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱fsg壳"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">手脱fsg壳</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱PECompact2-X"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">手脱PECompact2.X</span></a></li></ol></li></ol></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-6之前的笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">2018/11/6之前的笔记</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-6"><span class="post-toc-number">2.</span> <span class="post-toc-text">2018/11/6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱fsg壳"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">手脱fsg壳</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱PECompact2-X"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">手脱PECompact2.X</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-13"><span class="post-toc-number">3.</span> <span class="post-toc-text">2018/11/13</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱TELock0-98b1壳"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">手脱TELock0.98b1壳</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-14"><span class="post-toc-number">4.</span> <span class="post-toc-text">2018/11/14</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱exe32pack壳"><span class="post-toc-number">4.0.1.</span> <span class="post-toc-text">手脱exe32pack壳</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-16"><span class="post-toc-number">5.</span> <span class="post-toc-text">2018/11/16</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件绿化"><span class="post-toc-number">5.0.1.</span> <span class="post-toc-text">软件绿化</span></a></li></ol></li></ol></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">

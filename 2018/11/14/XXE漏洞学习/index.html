@@ -118,66 +118,80 @@
 <div id="content-outer">
   <div id="content-inner">
     
+<article id="post">
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-8.png)" >
+  <h2>没想到你是这样的XXE</h2>
+    
+  <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-11-14T11:13:30.000Z">
+          2018-11-14
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <blockquote>
+<p>XML External Entity，XML外部实体注入</p>
+</blockquote>
+<p>注入步骤：</p>
+<ol>
+<li>判断传输xml数据，得到回显</li>
+<li>分析过滤</li>
+<li>构造外部实体</li>
+</ol>
+<h2 id="初识XXE"><a href="#初识XXE" class="headerlink" title="初识XXE"></a>初识XXE</h2><p>为了感受XXE魅力，本地写了一个文件，结果搞了好久的环境，看了各种文档终于找到问题所在成功读写出我想要文件。</p>
+<p><strong>PHP源码</strong></p>
+<pre><code> &lt;?php  
+    $xml=&lt;&lt;&lt;EOF
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+    &lt;!DOCTYPE address[
+        &lt;!ENTITY xxe SYSTEM &quot;file:///D://phpStudy//WWW//myphp//html1.html&quot;&gt;   //读取任意文件
+    ]&gt;
+    &lt;root&gt;&lt;xxe&gt;&amp;xxe;&lt;/xxe&gt;&lt;/root&gt;
+    EOF;
+    $data = simplexml_load_string($xml,NULL,LIBXML_DTDVALID);    //参数超级重要啊
+    var_dump($data);    
+    echo LIBXML_DOTTED_VERSION;
+?&gt;
+</code></pre><p><strong>任意读取文件内容回显</strong><br><img src="https://i.imgur.com/UXJsx7E.png" alt=""></p>
+<p>一个比较坑的点是libxml的配置问题。<strong>默认情况下，libxml2不会加载dtd</strong></p>
+<p>试过的只有php5.2默认开启了。还有之前一直傻乎乎的把将第二个参数忽略掉了，所以一直卡在这里。</p>
+<h2 id="bwapp靶机上的xxe练习"><a href="#bwapp靶机上的xxe练习" class="headerlink" title="bwapp靶机上的xxe练习"></a>bwapp靶机上的xxe练习</h2><h4 id="Level-1"><a href="#Level-1" class="headerlink" title="Level-1"></a>Level-1</h4><p>通过抓包获得的POST数据为：</p>
+<pre><code>&lt;reset&gt;&lt;login&gt;root&lt;/login&gt;&lt;secret&gt;Any bugs?&lt;/secret&gt;&lt;/reset&gt;
+</code></pre><p>通过改变<code>&lt;login&gt;</code>标签内的数据可以看到回显。</p>
+<p><img src="https://i.imgur.com/GvtdaSD.png" alt="改变标签的内容"></p>
+<p>于是构造外部实体读取任意文件<br><img src="https://i.imgur.com/744hg1o.png" alt="读取文件"></p>
+<h4 id="Level-2"><a href="#Level-2" class="headerlink" title="Level-2"></a>Level-2</h4><p>阅读源码发现这一关禁止了xml外部实体引用，从session中获取login信息而不是从xml中获取。secret是从xml中获取有一个过滤，可以有sql注入,但暂时没有关于xxe思路。先填一个坑。</p>
+<h4 id="jarvisoj题目-api调用"><a href="#jarvisoj题目-api调用" class="headerlink" title="jarvisoj题目-api调用"></a>jarvisoj题目-api调用</h4><p>抓包，发现传输的数据是json格式的，改变你search中的内容，响应发生变化。没有过滤。<br><img src="https://i.imgur.com/vhtClP5.png" alt=""><br>当我们传输的是txt/xml格式的时候<br><strong>响应也是xml格式</strong><br><img src="https://i.imgur.com/IgIsgOc.png" alt=""></p>
+<p>构造payload<br><img src="https://i.imgur.com/rSgvICz.png" alt=""></p>
+<p>啊哈，(o゜▽゜)o☆[BINGO!]。</p>
+<p>和bwapp的不太一样，bwapp是直接传输后台处理后才回显，这道题直接解析传输数据就回显了。</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
 
 
-<div class="tags">
-  
-</div>
-
-<div id="recent-posts">
-  
-      <div class="recent-post-item lazy" style="background-color:#00e699"  data-original="/images/random/vateral-19.png"  >
-        <a class="recent-post-link" href="/2018/09/23/tcp，udp简单编程/">
-        <div class="post-hover">
-          <!--title-->
-          <p class="post-title"><a href="/2018/09/23/tcp，udp简单编程/" >tcp，udp简单编程</a></p>
-
-          <!--date-->
-          
-            <p class="post-time"> &nbsp &nbsp 发布于:<time datetime="2018-09-23T15:25:09.000Z">
-              2018-09-23
-            </time>
-            </p>
-          
-
-          <!--tags-->
-
-          标签:
-            
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li></ul>
-            
-          <!--分类-->
-
-          分类:
-            
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a></li></ul>
-            
-
-          <!--excerpt-->
-          <div class="post-excerpt">
-            <p>
-              摘要：
-              
-                了解TCP,UDP
-UDP：使用IP地址和端口号进行标识，从此将数据包发送至目标地址
-TCP：基于字节流的传输层通信协议
-              
-            </p>
-          </div>
-          <div class="post-more"><a href="/2018/09/23/tcp，udp简单编程/" >全文阅读</a></div>
-        </div>
-        </a>
-      </div>
-  
-  <nav class="paging">
-    <span class="page-number current">1</span>
+  <!-- Next Nav -->
+    
+  <a href="/2018/11/11/文件包含/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
 </nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初识XXE"><span class="post-toc-number">1.</span> <span class="post-toc-text">初识XXE</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bwapp靶机上的xxe练习"><span class="post-toc-number">2.</span> <span class="post-toc-text">bwapp靶机上的xxe练习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Level-1"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">Level-1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Level-2"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">Level-2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#jarvisoj题目-api调用"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">jarvisoj题目-api调用</span></a></li></ol></li></ol></li></ol>
 </div>
-
-
-
-
-
+<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
+<script type="text/javascript">
+    menu();
+</script>
   </div>
 </div>
 <div id="bottom-outer">

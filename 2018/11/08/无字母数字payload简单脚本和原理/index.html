@@ -85,14 +85,14 @@
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">3</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">4</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
     </li>
 </ul>
 <!--categories-->
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">5</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">6</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
     </li>
 </ul>
 <!--tags-->
@@ -119,7 +119,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-16.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-13.png)" >
   <h2>无字母数字payload简单脚本和原理</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-11-08T13:37:12.000Z">
@@ -130,7 +130,9 @@
   </div>
   <div class="post-page-content">
   <p>&emsp;&emsp;之前看到一个ctf练习平台出了一道过滤所有的字母和数字的题，顿时感到懵逼。如果waf将所有的东西都过滤了我们将如何构造我们想要的东西。<br>看了这个<a href="https://www.leavesongs.com/PENETRATION/webshell-without-alphanum.html" target="_blank" rel="noopener">大佬写的博文</a>我顿时感觉自己通透了，万万没想到<strong>异或</strong>也可以做的如此地步。</p>
-<p>&emsp;&emsp;原理就是通过未被过滤的字符异或得到自己想要的被过滤的字符比如    <code>&lt;和{字符异或得到G</code><br>同理通过这种方法我们可以通过异或构造被过滤的任何字符</p>
+<p>&emsp;&emsp;原理就是通过未被过滤的字符异或得到自己想要的被过滤的字符比如    <code>&lt;和{字符异或得到G</code>同理通过这种方法我们可以通过异或构造被过滤的任何字符</p>
+<p>&emsp;&emsp;在本地的环境测试怎么都不对原来是在PHP5.4之前PHP指令magic_quotes_gpc默认是on，把我的字符转义了。先把这个特征先记下来再说。</p>
+<p>还有一点需要提醒的是这是表达式必须要运算后才能得到结果。也就是传入像echo，eval()之类的才行。</p>
 <p>&emsp;&emsp;这里放自己写的一个python小脚本求解字符构造的成分</p>
 <pre><code>def  sovle():
 a = input(&quot;输入要异或编码的字母&quot;)

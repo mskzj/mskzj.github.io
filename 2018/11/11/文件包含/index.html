@@ -85,14 +85,14 @@
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">3</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">4</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
     </li>
 </ul>
 <!--categories-->
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">5</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">6</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
     </li>
 </ul>
 <!--tags-->
@@ -119,7 +119,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-18.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-16.png)" >
   <h2>文件包含</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-11-11T02:46:37.000Z">
@@ -140,9 +140,7 @@ include($filename);
 <li>allow_url_fopen</li>
 <li>允许包含的文件的白名单</li>
 </ol>
-<p>值得注意的是从PHP5.2开始allow_url_include就默认为Off了，而allow_url_fopen一直是On。这意味着通过get传参<strong>远程文件包含基本上不可行了</strong>（除非将allow_url_include就默认为ON，估计只有在ctf比赛中才看得到，还有对waf很有信心的情况下）</p>
-<hr>
-<h4 id="本地文件包含"><a href="#本地文件包含" class="headerlink" title="本地文件包含"></a>本地文件包含</h4><p>所以我们本地包含的文件可以是什么呢，任何在允许包含的文件的白名单的文件，还有一点值得注意的是<strong>被包含的文件会被自动解析成PHP文件</strong>，所以<strong>有文件上传漏洞的时候这是可以配合包含恶意文件的搞事情。</strong><br>比如我在本地写一个txt文件</p>
+<h2 id="值得注意的是从PHP5-2开始allow-url-include就默认为Off了，而allow-url-fopen一直是On。这意味着通过get传参远程文件包含基本上不可行了（除非将allow-url-include就默认为ON，估计只有在ctf比赛中才看得到，还有对waf很有信心的情况下）。"><a href="#值得注意的是从PHP5-2开始allow-url-include就默认为Off了，而allow-url-fopen一直是On。这意味着通过get传参远程文件包含基本上不可行了（除非将allow-url-include就默认为ON，估计只有在ctf比赛中才看得到，还有对waf很有信心的情况下）。" class="headerlink" title="值得注意的是从PHP5.2开始allow_url_include就默认为Off了，而allow_url_fopen一直是On。这意味着通过get传参远程文件包含基本上不可行了（除非将allow_url_include就默认为ON，估计只有在ctf比赛中才看得到，还有对waf很有信心的情况下）。"></a>值得注意的是从PHP5.2开始allow_url_include就默认为Off了，而allow_url_fopen一直是On。这意味着通过get传参<strong>远程文件包含基本上不可行了</strong>（除非将allow_url_include就默认为ON，估计只有在ctf比赛中才看得到，还有对waf很有信心的情况下）。</h2><h4 id="本地文件包含"><a href="#本地文件包含" class="headerlink" title="本地文件包含"></a>本地文件包含</h4><p>所以我们本地包含的文件可以是什么呢，任何在允许包含的文件的白名单的文件，还有一点值得注意的是<strong>被包含的文件会被自动解析成PHP文件</strong>，所以<strong>有文件上传漏洞的时候这是可以配合包含恶意文件的搞事情。</strong><br>比如我在本地写一个txt文件</p>
 <pre><code>&lt;?php phpinfor();?&gt;
 </code></pre><p><img src="https://i.imgur.com/Wc1tcrU.png" alt="包含本地txt文件"></p>
 <h4 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h4><p>那么php伪协议还能用吗？</p>
@@ -157,6 +155,10 @@ include($filename);
 <nav class="post-nav">
   <!-- Prev Nav -->
     
+  <a href="/2018/11/14/XXE漏洞学习/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
+    
 
 
   <!-- Next Nav -->
@@ -169,7 +171,7 @@ include($filename);
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#本地文件包含"><span class="post-toc-number">1.</span> <span class="post-toc-text">本地文件包含</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#伪协议"><span class="post-toc-number">2.</span> <span class="post-toc-text">伪协议</span></a></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#值得注意的是从PHP5-2开始allow-url-include就默认为Off了，而allow-url-fopen一直是On。这意味着通过get传参远程文件包含基本上不可行了（除非将allow-url-include就默认为ON，估计只有在ctf比赛中才看得到，还有对waf很有信心的情况下）。"><span class="post-toc-number">1.</span> <span class="post-toc-text">值得注意的是从PHP5.2开始allow_url_include就默认为Off了，而allow_url_fopen一直是On。这意味着通过get传参远程文件包含基本上不可行了（除非将allow_url_include就默认为ON，估计只有在ctf比赛中才看得到，还有对waf很有信心的情况下）。</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#本地文件包含"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">本地文件包含</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#伪协议"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">伪协议</span></a></li></ol></li></ol></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
