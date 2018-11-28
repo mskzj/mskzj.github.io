@@ -85,14 +85,14 @@
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">4</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+        <a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">5</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
     </li>
 </ul>
 <!--categories-->
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">6</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">7</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
     </li>
 </ul>
 <!--tags-->
@@ -119,7 +119,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-8.png)" >
+  <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-7.png)" >
   <h2>没想到你是这样的XXE</h2>
     
   <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-11-14T11:13:30.000Z">
@@ -155,13 +155,16 @@
 </code></pre><p><strong>任意读取文件内容回显</strong><br><img src="https://i.imgur.com/UXJsx7E.png" alt=""></p>
 <p>一个比较坑的点是libxml的配置问题。<strong>默认情况下，libxml2不会加载dtd</strong></p>
 <p>试过的只有php5.2默认开启了。还有之前一直傻乎乎的把将第二个参数忽略掉了，所以一直卡在这里。</p>
+<h2 id="php-filter-在xxe漏洞上的妙用"><a href="#php-filter-在xxe漏洞上的妙用" class="headerlink" title="php://filter 在xxe漏洞上的妙用"></a>php://filter 在xxe漏洞上的妙用</h2><p>当我们读取的文件格式是php时，由于&lt;?php …?&gt;很像标签所以会有读取的错误</p>
+<p><img src="https://i.imgur.com/6pjpCGf.png" alt=""></p>
+<p>当我们使用<code>php://filter/read=convert.base64-encode/resource=./xxe.php</code>会将读取的代码转化为base64格式，问题引刃而解。这也是一个小技巧吧<br><img src="https://i.imgur.com/1tViKIc.png" alt=""></p>
 <h2 id="bwapp靶机上的xxe练习"><a href="#bwapp靶机上的xxe练习" class="headerlink" title="bwapp靶机上的xxe练习"></a>bwapp靶机上的xxe练习</h2><h4 id="Level-1"><a href="#Level-1" class="headerlink" title="Level-1"></a>Level-1</h4><p>通过抓包获得的POST数据为：</p>
 <pre><code>&lt;reset&gt;&lt;login&gt;root&lt;/login&gt;&lt;secret&gt;Any bugs?&lt;/secret&gt;&lt;/reset&gt;
 </code></pre><p>通过改变<code>&lt;login&gt;</code>标签内的数据可以看到回显。</p>
 <p><img src="https://i.imgur.com/GvtdaSD.png" alt="改变标签的内容"></p>
 <p>于是构造外部实体读取任意文件<br><img src="https://i.imgur.com/744hg1o.png" alt="读取文件"></p>
 <h4 id="Level-2"><a href="#Level-2" class="headerlink" title="Level-2"></a>Level-2</h4><p>阅读源码发现这一关禁止了xml外部实体引用，从session中获取login信息而不是从xml中获取。secret是从xml中获取有一个过滤，可以有sql注入,但暂时没有关于xxe思路。先填一个坑。</p>
-<h4 id="jarvisoj题目-api调用"><a href="#jarvisoj题目-api调用" class="headerlink" title="jarvisoj题目-api调用"></a>jarvisoj题目-api调用</h4><p>抓包，发现传输的数据是json格式的，改变你search中的内容，响应发生变化。没有过滤。<br><img src="https://i.imgur.com/vhtClP5.png" alt=""><br>当我们传输的是txt/xml格式的时候<br><strong>响应也是xml格式</strong><br><img src="https://i.imgur.com/IgIsgOc.png" alt=""></p>
+<h2 id="jarvisoj题目-api调用"><a href="#jarvisoj题目-api调用" class="headerlink" title="jarvisoj题目-api调用"></a>jarvisoj题目-api调用</h2><p>抓包，发现传输的数据是json格式的，改变你search中的内容，响应发生变化。没有过滤。<br><img src="https://i.imgur.com/vhtClP5.png" alt=""><br>当我们传输的是txt/xml格式的时候<br><strong>响应也是xml格式</strong><br><img src="https://i.imgur.com/IgIsgOc.png" alt=""></p>
 <p>构造payload<br><img src="https://i.imgur.com/rSgvICz.png" alt=""></p>
 <p>啊哈，(o゜▽゜)o☆[BINGO!]。</p>
 <p>和bwapp的不太一样，bwapp是直接传输后台处理后才回显，这道题直接解析传输数据就回显了。</p>
@@ -173,6 +176,10 @@
 </article>
 <nav class="post-nav">
   <!-- Prev Nav -->
+    
+  <a href="/2018/11/28/php反序列化漏洞学习/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
     
 
 
@@ -186,7 +193,7 @@
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初识XXE"><span class="post-toc-number">1.</span> <span class="post-toc-text">初识XXE</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bwapp靶机上的xxe练习"><span class="post-toc-number">2.</span> <span class="post-toc-text">bwapp靶机上的xxe练习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Level-1"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">Level-1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Level-2"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">Level-2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#jarvisoj题目-api调用"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">jarvisoj题目-api调用</span></a></li></ol></li></ol></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初识XXE"><span class="post-toc-number">1.</span> <span class="post-toc-text">初识XXE</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#php-filter-在xxe漏洞上的妙用"><span class="post-toc-number">2.</span> <span class="post-toc-text">php://filter 在xxe漏洞上的妙用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bwapp靶机上的xxe练习"><span class="post-toc-number">3.</span> <span class="post-toc-text">bwapp靶机上的xxe练习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Level-1"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">Level-1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Level-2"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">Level-2</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jarvisoj题目-api调用"><span class="post-toc-number">4.</span> <span class="post-toc-text">jarvisoj题目-api调用</span></a></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">

