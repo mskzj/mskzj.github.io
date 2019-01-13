@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="keywords" content="敬畏之心">
+  <meta name="description" content="学习代码之路">
+  
+  <title>太空独角兽</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/materialize.min.css">
+    
+      <link rel="stylesheet" href="/css/main.min.css">
+    
+  
+  <style type="text/css">
+      html{
+          font-family: sans-serif;
+          font-weight: 300;
+      }
+      @font-face {
+          font-family: 'Material Icons';
+          font-style: normal;
+          font-weight: 400;
+          src: url(/fonts/MaterialIcons-Regular.eot);
+          src: url(/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+          url(/fonts/MaterialIcons-Regular.woff) format('woff'),
+          url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
+      }
+  </style>
+<link rel="shortcut icon" href="/source/favicon.jpg">
+<link rel="stylesheet" href="/css/prism-duotone-sea.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head>
+<body>
+<div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
+<div id="menu-outer">
+  <div id="menu-inner">
+      <ul id="slide-out" class="side-nav" >
+    <div class="nav-header"  style="background-image: url(/images/header-bg.png);background-color:#272727">
+    <div class="header-box"><img src="/images/明石.jpg" ondragstart="return false;"></div>
+    <p>太空独角兽</p>
+    <div class="nav-link">
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box twitter"></div></a>
+        
+        
+        <a href="https://github.com/mskzj" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:mskzj123456@163.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+        <a href="https://www.zhihu.com/people/mu-si-kang-lan-zao/activities" target="_blank"> <div class="link-box zhihu"></div></a>
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
+    <!--Homepage-->
+
+<li class="nav-list">
+    <a href="/" target="_self">
+        <div class="nav-ico"><i class="material-icons">home</i> </div><p>主页</p>
+    </a>
+</li>
+
+<!--archives-->
+
+<li class="nav-list dropdown-btn">
+    <a  class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">assignment</i></div><p>归档</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="archive-link" href="/archives/2019/01/">January 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">5</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+    </li>
+</ul>
+<!--categories-->
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">7</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">2</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
+    </li>
+</ul>
+<!--tags-->
+
+<li class="nav-list">
+    <a href="/archives" target="_self">
+        <div class="nav-ico"><i class="material-icons">bookmark</i> </div><p>标签</p>
+    </a>
+</li>
+
+<!--photo-->
+
+<!--friends-->
+
+<li class="nav-list">
+    <a href="/friends" target="_self">
+        <div class="nav-ico"><i class="material-icons">face</i> </div><p>友链</p>
+    </a>
+</li>
+
+<!--about-->
+
+<li class="nav-list">
+    <a href="/about" target="_self">
+        <div class="nav-ico"><i class="material-icons">copyright</i> </div><p>关于</p>
+    </a>
+</li>
+
+
+</ul>
+
+  </div>
+</div>
+
+<div id="content-outer">
+  <div id="content-inner">
+    
+<article id="post">
+  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-17.png)" >
+  <h2>tcp，udp简单编程</h2>
+    
+  <p>作者:太空独角兽 &nbsp&nbsp 发布于:<time datetime="2018-09-23T15:25:09.000Z">
+          2018-09-23
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <h3 id="了解TCP-UDP"><a href="#了解TCP-UDP" class="headerlink" title="了解TCP,UDP"></a>了解TCP,UDP</h3><hr>
+<p><em>UDP：使用IP地址和端口号进行标识，从此将数据包发送至目标地址</em></p>
+<p><em>TCP：基于字节流的传输层通信协议</em></p>
+<hr>
+<h3 id="初识套接字"><a href="#初识套接字" class="headerlink" title="初识套接字"></a>初识套接字</h3><p>&emsp;&emsp;套接字用（IP地址：端口号）表示。在python中使用socket.socket对象来方便的表示套接字。该对象内部维护了操作系统标识套接字的整数。</p>
+<h2 id="再识socket-socket对象"><a href="#再识socket-socket对象" class="headerlink" title="再识socket.socket对象"></a>再识socket.socket对象</h2><p>&emsp;&emsp;在有了套接字后，我们开始继续了解socket.socket对象。就像传统的寄信一样，除了要知道我们递送信息的地址，还要有信息的实体的内容，发送和接收信息的动作。而这一切都可以通过操作这个对象来完成。</p>
+<p><strong>首先是发送信息</strong></p>
+<pre><code>  sock.sendto(data,address)    
+</code></pre><p><strong>然后是接收信息</strong></p>
+<pre><code>  data,address = sock.recvform()
+</code></pre><h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><p>下面是一个简单的回复客户端发送字符长度的服务器端。</p>
+<pre><code>def server(interface,port):
+      sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+      sock.bind((interface, port))  #绑定接口等
+      print(&#39;Listening at {}&#39;.format(sock.getsockname())) 
+      while True:      #不断接收信息
+           data, address = sock.recvfrom(MAX_BYTES)
+           if random.random() &lt; 0.5:
+            print(&#39;pretending drop&#39;)
+            continue                  #模拟丢包
+            text = data.decode(&#39;ascii&#39;)
+            print(&#39;The client at {} says {!r}&#39;.format(address, text))      #打印客户端说了啥
+            text = &#39;Your data was {} bytes long&#39;.format(len(data))
+            data = text.encode(&#39;ascii&#39;)
+            sock.sendto(data, address) #发送信息 
+</code></pre><p>首先我们注意到的是<strong>socket.socket</strong>本身也有很多参数，地址族，套接字类型。感觉有点麻烦啊，然而实际的编程过程中是不会出现像AF_INET等真实的符号。而是可以使用一个强大的工具<strong>getaddrinfo()</strong>来操作涉及地址的工作。比如说</p>
+<pre><code> infolist = socket.getaddrinfo(&#39;127.0.0.1&#39;,&#39;smtp&#39;,0,socket.SOCK_STREAM,0)
+</code></pre><p>得到的infolist是一个元组列表，可以通过操作这个列表得到我们目标的所要构造socket.socket的参数。</p>
+<hr>
+<p>&emsp;&emsp;客户端的写法和服务器端类似就不再赘述了。客户端最重要的是进行异常处理，比如丢包和服务器端识别。丢包处理我们可能会很自然的想到超过一定时间没有收到回复就放弃等待或者是重新发送。然而面对判断发送信息方的真实身份时，udp协议就不太好使了。</p>
+<p>&emsp;&emsp;可以看到的是这样的写法可以是任何人都可以发送给服务器端，相似的任何人也可以构造数据包来发送给客户端。在服务器端响应信息之前，第三方构造的信息发送到了客户端，如果没有判断是否是真正的服务器端发送的信息，可能就会把第三方的信息当作是服务器的响应信息了。<br><strong>处理这种问题比较自然的想法是直接判断响应方的IP和发送目的方的IP是否相等</strong>，然而事情并没有这样简单，伪造数据包可以成功通过这样的地址检测</p>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><p><strong>又是套接字：</strong></p>
+<p>tcp实际上包含了两种不同的套接字，“被动”监听套接字，“主动”连接套接字。顾名思义，一个拿来的监听，一个拿来连接。为什么tcp的事情这么多呢？因为tcp基于字节流的传输层通信协议。监听套接字用来维护“套接字名”，指示操作系统首先使用哪个特定的tcp端口号来接收请求连接。</p>
+<pre><code>      def server(interface, port):
+          sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+          sock.bind((interface, port))
+          sock.listen(1)    #监听，参数是指等待连接的最大数
+          print(&#39;listening at :&#39;,sock.getsockname())
+          while True:
+                print(&#39;Waiting to accept a new connection&#39;)
+                sc,sockname = sock.accept()  #等待客户端，然后返回新的连接套接字sc
+                print(&#39;We have accepted a connection from&#39;, sockname)
+                message = recv(sc)
+                print(&#39;client says:&#39;, repr(message))
+                sc.sendall(b&#39;Farewell, client&#39;)
+                sc.close()   #关闭连接
+                 print(&#39;reply sent,closed&#39;)
+</code></pre><p>客户端</p>
+<pre><code>    def client(host,port):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((host,port))  #连接服务器端
+        print(&#39;Client has been assigned socket name&#39;, sock.getsockname())
+        sock.sendall(b&#39;Hi there, server&#39;)
+        reply = recv(sock)
+        print(&#39;server reply:&#39;, repr(reply))
+        sock.close()
+</code></pre>
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2018/11/06/脱壳学习日常记录笔记/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
+    
+
+
+  <!-- Next Nav -->
+    
+  <a href="/2018/05/10/xss学习/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#了解TCP-UDP"><span class="post-toc-number">1.</span> <span class="post-toc-text">了解TCP,UDP</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#初识套接字"><span class="post-toc-number">2.</span> <span class="post-toc-text">初识套接字</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#再识socket-socket对象"><span class="post-toc-number"></span> <span class="post-toc-text">再识socket.socket对象</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#UDP"><span class="post-toc-number"></span> <span class="post-toc-text">UDP</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#TCP"><span class="post-toc-number"></span> <span class="post-toc-text">TCP</span></a>
+</div>
+<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
+<script type="text/javascript">
+    menu();
+</script>
+  </div>
+</div>
+<div id="bottom-outer">
+  <div id="bottom-inner">
+    <a  id="top-button" onfocus="this.blur();"><div class="up upinbody" style="background-color:#272727"><i class="material-icons material-up">vertical_align_top</i></div></a>
+
+
+<p >Copyright ©  2018  太空独角兽</p>
+<p style="font-size: 10px" id="footer-times" data-time="4/4/2018"></p>
+<script>
+    var beginTime=document.getElementById("footer-times").dataset.time
+    function show_date_time(){
+        var span=document.getElementById("footer-times")
+        window.setTimeout("show_date_time()", 1000);
+        BirthDay=new Date(beginTime);//初始日期
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=Math.floor(e_hrsold);
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=Math.floor((e_hrsold-hrsold)*60);
+        seconds=Math.floor((e_minsold-minsold)*60);
+        span.innerHTML="本站已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+    }
+    show_date_time();
+</script>
+
+  </div>
+</div>
+
+<!--影集界面需要的资源-->
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/materialize.min.js"></script>
+
+<script src="/js/main.min.js"></script>
+
+
+<script>
+    NProgress.start();
+    NProgress.done();
+    lazy();
+    links();
+    window.onpopstate = menu();
+    //pjax操作
+    $(document).pjax('a:not(.nopjax)', '#content-inner', {fragment:'#content-inner', timeout:8000});
+    $(document).on('pjax:start', NProgress.start).on('pjax:end', NProgress.done)
+        .on('pjax:end', () => {
+            dowmdiv();
+            lazy();
+            toc();
+            links();
+            menu();
+        });
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>

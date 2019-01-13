@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="keywords" content="敬畏之心">
+  <meta name="description" content="学习代码之路">
+  
+  <title>太空独角兽</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/materialize.min.css">
+    
+      <link rel="stylesheet" href="/css/main.min.css">
+    
+  
+  <style type="text/css">
+      html{
+          font-family: sans-serif;
+          font-weight: 300;
+      }
+      @font-face {
+          font-family: 'Material Icons';
+          font-style: normal;
+          font-weight: 400;
+          src: url(/fonts/MaterialIcons-Regular.eot);
+          src: url(/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+          url(/fonts/MaterialIcons-Regular.woff) format('woff'),
+          url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
+      }
+  </style>
+<link rel="shortcut icon" href="/source/favicon.jpg">
+<link rel="stylesheet" href="/css/prism-duotone-sea.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head>
+<body>
+<div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
+<div id="menu-outer">
+  <div id="menu-inner">
+      <ul id="slide-out" class="side-nav" >
+    <div class="nav-header"  style="background-image: url(/images/header-bg.png);background-color:#272727">
+    <div class="header-box"><img src="/images/明石.jpg" ondragstart="return false;"></div>
+    <p>太空独角兽</p>
+    <div class="nav-link">
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box twitter"></div></a>
+        
+        
+        <a href="https://github.com/mskzj" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:mskzj123456@163.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+        <a href="https://www.zhihu.com/people/mu-si-kang-lan-zao/activities" target="_blank"> <div class="link-box zhihu"></div></a>
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
+    <!--Homepage-->
+
+<li class="nav-list">
+    <a href="/" target="_self">
+        <div class="nav-ico"><i class="material-icons">home</i> </div><p>主页</p>
+    </a>
+</li>
+
+<!--archives-->
+
+<li class="nav-list dropdown-btn">
+    <a  class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">assignment</i></div><p>归档</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="archive-link" href="/archives/2019/01/">January 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">5</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+    </li>
+</ul>
+<!--categories-->
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">7</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">2</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
+    </li>
+</ul>
+<!--tags-->
+
+<li class="nav-list">
+    <a href="/archives" target="_self">
+        <div class="nav-ico"><i class="material-icons">bookmark</i> </div><p>标签</p>
+    </a>
+</li>
+
+<!--photo-->
+
+<!--friends-->
+
+<li class="nav-list">
+    <a href="/friends" target="_self">
+        <div class="nav-ico"><i class="material-icons">face</i> </div><p>友链</p>
+    </a>
+</li>
+
+<!--about-->
+
+<li class="nav-list">
+    <a href="/about" target="_self">
+        <div class="nav-ico"><i class="material-icons">copyright</i> </div><p>关于</p>
+    </a>
+</li>
+
+
+</ul>
+
+  </div>
+</div>
+
+<div id="content-outer">
+  <div id="content-inner">
+    
+<article id="post">
+  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-10.png)" >
+  <h2>没想到你是这样的XXE</h2>
+    
+  <p>作者:太空独角兽 &nbsp&nbsp 发布于:<time datetime="2018-11-14T11:13:30.000Z">
+          2018-11-14
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <blockquote>
+<p>XML External Entity，XML外部实体注入</p>
+</blockquote>
+<p>注入步骤：</p>
+<ol>
+<li>判断传输xml数据，得到回显</li>
+<li>分析过滤</li>
+<li>构造外部实体</li>
+</ol>
+<h2 id="初识XXE"><a href="#初识XXE" class="headerlink" title="初识XXE"></a>初识XXE</h2><p>为了感受XXE魅力，本地写了一个文件，结果搞了好久的环境，看了各种文档终于找到问题所在成功读写出我想要文件。</p>
+<p><strong>PHP源码</strong></p>
+<pre><code> &lt;?php  
+    $xml=&lt;&lt;&lt;EOF
+    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+    &lt;!DOCTYPE address[
+        &lt;!ENTITY xxe SYSTEM &quot;file:///D://phpStudy//WWW//myphp//html1.html&quot;&gt;   //读取任意文件
+    ]&gt;
+    &lt;root&gt;&lt;xxe&gt;&amp;xxe;&lt;/xxe&gt;&lt;/root&gt;
+    EOF;
+    $data = simplexml_load_string($xml,NULL,LIBXML_DTDVALID);    //参数超级重要啊
+    var_dump($data);    
+    echo LIBXML_DOTTED_VERSION;
+?&gt;
+</code></pre><p><strong>任意读取文件内容回显</strong><br><img src="https://i.imgur.com/UXJsx7E.png" alt=""></p>
+<p>一个比较坑的点是libxml的配置问题。<strong>默认情况下，libxml2不会加载dtd</strong></p>
+<p>试过的只有php5.2默认开启了。还有之前一直傻乎乎的把将第二个参数忽略掉了，所以一直卡在这里。</p>
+<h2 id="php-filter-在xxe漏洞上的妙用"><a href="#php-filter-在xxe漏洞上的妙用" class="headerlink" title="php://filter 在xxe漏洞上的妙用"></a>php://filter 在xxe漏洞上的妙用</h2><p>当我们读取的文件格式是php时，由于&lt;?php …?&gt;很像标签所以会有读取的错误</p>
+<p><img src="https://i.imgur.com/6pjpCGf.png" alt=""></p>
+<p>当我们使用<code>php://filter/read=convert.base64-encode/resource=./xxe.php</code>会将读取的代码转化为base64格式，问题引刃而解。这也是一个小技巧吧<br><img src="https://i.imgur.com/1tViKIc.png" alt=""></p>
+<h2 id="bwapp靶机上的xxe练习"><a href="#bwapp靶机上的xxe练习" class="headerlink" title="bwapp靶机上的xxe练习"></a>bwapp靶机上的xxe练习</h2><h4 id="Level-1"><a href="#Level-1" class="headerlink" title="Level-1"></a>Level-1</h4><p>通过抓包获得的POST数据为：</p>
+<pre><code>&lt;reset&gt;&lt;login&gt;root&lt;/login&gt;&lt;secret&gt;Any bugs?&lt;/secret&gt;&lt;/reset&gt;
+</code></pre><p>通过改变<code>&lt;login&gt;</code>标签内的数据可以看到回显。</p>
+<p><img src="https://i.imgur.com/GvtdaSD.png" alt="改变标签的内容"></p>
+<p>于是构造外部实体读取任意文件<br><img src="https://i.imgur.com/744hg1o.png" alt="读取文件"></p>
+<h4 id="Level-2"><a href="#Level-2" class="headerlink" title="Level-2"></a>Level-2</h4><p>阅读源码发现这一关禁止了xml外部实体引用，从session中获取login信息而不是从xml中获取。secret是从xml中获取有一个过滤，可以有sql注入,但暂时没有关于xxe思路。先填一个坑。</p>
+<h2 id="jarvisoj题目-api调用"><a href="#jarvisoj题目-api调用" class="headerlink" title="jarvisoj题目-api调用"></a>jarvisoj题目-api调用</h2><p>抓包，发现传输的数据是json格式的，改变你search中的内容，响应发生变化。没有过滤。<br><img src="https://i.imgur.com/vhtClP5.png" alt=""><br>当我们传输的是txt/xml格式的时候<br><strong>响应也是xml格式</strong><br><img src="https://i.imgur.com/IgIsgOc.png" alt=""></p>
+<p>构造payload<br><img src="https://i.imgur.com/rSgvICz.png" alt=""></p>
+<p>啊哈，(o゜▽゜)o☆[BINGO!]。</p>
+<p>和bwapp的不太一样，bwapp是直接传输后台处理后才回显，这道题直接解析传输数据就回显了。</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+  <a href="/2018/11/28/php反序列化漏洞学习/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
+    
+
+
+  <!-- Next Nav -->
+    
+  <a href="/2018/11/11/文件包含/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初识XXE"><span class="post-toc-number">1.</span> <span class="post-toc-text">初识XXE</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#php-filter-在xxe漏洞上的妙用"><span class="post-toc-number">2.</span> <span class="post-toc-text">php://filter 在xxe漏洞上的妙用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#bwapp靶机上的xxe练习"><span class="post-toc-number">3.</span> <span class="post-toc-text">bwapp靶机上的xxe练习</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Level-1"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">Level-1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Level-2"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">Level-2</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jarvisoj题目-api调用"><span class="post-toc-number">4.</span> <span class="post-toc-text">jarvisoj题目-api调用</span></a></li></ol>
+</div>
+<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
+<script type="text/javascript">
+    menu();
+</script>
+  </div>
+</div>
+<div id="bottom-outer">
+  <div id="bottom-inner">
+    <a  id="top-button" onfocus="this.blur();"><div class="up upinbody" style="background-color:#272727"><i class="material-icons material-up">vertical_align_top</i></div></a>
+
+
+<p >Copyright ©  2018  太空独角兽</p>
+<p style="font-size: 10px" id="footer-times" data-time="4/4/2018"></p>
+<script>
+    var beginTime=document.getElementById("footer-times").dataset.time
+    function show_date_time(){
+        var span=document.getElementById("footer-times")
+        window.setTimeout("show_date_time()", 1000);
+        BirthDay=new Date(beginTime);//初始日期
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=Math.floor(e_hrsold);
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=Math.floor((e_hrsold-hrsold)*60);
+        seconds=Math.floor((e_minsold-minsold)*60);
+        span.innerHTML="本站已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+    }
+    show_date_time();
+</script>
+
+  </div>
+</div>
+
+<!--影集界面需要的资源-->
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/materialize.min.js"></script>
+
+<script src="/js/main.min.js"></script>
+
+
+<script>
+    NProgress.start();
+    NProgress.done();
+    lazy();
+    links();
+    window.onpopstate = menu();
+    //pjax操作
+    $(document).pjax('a:not(.nopjax)', '#content-inner', {fragment:'#content-inner', timeout:8000});
+    $(document).on('pjax:start', NProgress.start).on('pjax:end', NProgress.done)
+        .on('pjax:end', () => {
+            dowmdiv();
+            lazy();
+            toc();
+            links();
+            menu();
+        });
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>
