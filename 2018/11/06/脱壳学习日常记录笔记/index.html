@@ -57,7 +57,7 @@
         <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
         
         
-        <a href="https://www.zhihu.com/people/mu-si-kang-lan-zao/activities" target="_blank"> <div class="link-box zhihu"></div></a>
+        <a href="http://example.com" target="_blank"> <div class="link-box zhihu"></div></a>
         
     </div>
     <div class="nav-search">
@@ -133,7 +133,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-2.png)" >
+  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-15.png)" >
   <h2>脱壳学习日常记录笔记</h2>
     
   <p>作者:太空独角兽 &nbsp&nbsp 发布于:<time datetime="2018-11-06T09:17:34.000Z">
@@ -145,7 +145,7 @@
   <div class="post-page-content">
   <h2 id="2018-11-6之前的笔记"><a href="#2018-11-6之前的笔记" class="headerlink" title="2018/11/6之前的笔记"></a>2018/11/6之前的笔记</h2><p>单步跟踪法—-凭毅力和信心找oep</p>
 <p>ESP定律法利用堆栈平衡——有入栈有出栈</p>
-<p><strong>VB 常见入口</strong></p>
+<p><strong>VB 常见入口</strong>（前面一堆jmp）</p>
 <pre><code>004012D4    68 54474000     push QQ个性签.00404754
 004012D9    E8 F0FFFFFF     call QQ个性签.004012CE                      ; jmp 到 msvbvm60.ThunRTMain
 </code></pre><h2 id="2018-11-6"><a href="#2018-11-6" class="headerlink" title="2018/11/6"></a>2018/11/6</h2><h4 id="手脱fsg壳"><a href="#手脱fsg壳" class="headerlink" title="手脱fsg壳"></a>手脱fsg壳</h4><p><strong>1.找oep</strong></p>
@@ -271,12 +271,45 @@
 <p>做的练习是，变形之后esp定律不得行了，有些call就直接跑飞，所以只有单步跟了。</p>
 <p>今天遇到还有一个比较坑的地方是循环上下跳转，emmmmmm,就跟个死循环一样，然而程序可以运行则证明这个循环上下跳是有限次的，于是乎，下断F9直接记录多少次（n）F9才会跑飞，然后再次运行n-1次，然后单步跟。</p>
 <h2 id="2018-12-14"><a href="#2018-12-14" class="headerlink" title="2018/12/14"></a>2018/12/14</h2><h4 id="ACProtect132（无stolen-code）"><a href="#ACProtect132（无stolen-code）" class="headerlink" title="ACProtect132（无stolen code）"></a>ACProtect132（无stolen code）</h4><p>EP段：.perplex</p>
+<p>（查壳出来是UltraProtect，其是ACProtect以前的名字）</p>
 <p><del>教程和实际操作好多不一样，我是个弟弟</del></p>
 <p>这个壳和ximo教程上演示的不太一样，最开始我以为是没有隐藏od的原因，结果一看才知道<strong>52od可以自动隐藏</strong>（太智能了吧）。</p>
 <p>然而仅仅忽略内存断点一点用都没得（一次shift+f9直接跑飞）</p>
-<p>下面是我的做法：<br>最后一次异常，在se句柄处下内存访问断点然后shift+f9到跑飞的前一次，（删除内存断点）然后单步跟到一个return，然后直接在m中的代码端下（普通）断点，shitf+f9然后单步走跑过这个壳最开始弹的加壳弹窗就直接到oep。</p>
+<p>下面是我的做法：<br>最后一次异常，勾选内存访问异常，在se句柄处下内存访问断点然后shift+f9到跑飞的前一次，（删除内存断点）然后单步跟到一个retn，然后直接在m中的代码端下（普通）断点，shitf+f9然后单步走跑过这个壳最开始弹的加壳弹窗就直接到oep。</p>
 <p>一点小思路：一开始打开这个的时候，它最开始有个弹窗之后才是程序，我最开始的想法是在CreateWindowExA或是其他API下断点然后运行到这个窗口执行完毕就可以定位到oep前，然而…..没有搞出来</p>
 <p>今天体会最深的一点是要学会只是的迁移，依葫芦画瓢已经逐渐不可行了，还是要看原理鸭＞︿＜</p>
+<h2 id="2019-1-20"><a href="#2019-1-20" class="headerlink" title="2019/1/20"></a>2019/1/20</h2><p>放寒假啦，期末终于考完了</p>
+<h4 id="ACProtect132（有stolen-code）"><a href="#ACProtect132（有stolen-code）" class="headerlink" title="ACProtect132（有stolen code）"></a>ACProtect132（有stolen code）</h4><p>要点：修复“stolen code”</p>
+<p>被偷走的code一般放在了壳里面</p>
+<p>stolen code也就是找到的oep缺少了一部分代码，我们需要的是找到“被偷走的代码”，这需要了解程序的常见入口，再在壳的return处跟着跟随可能的oep第一句的代码。最终到正常入口处将截取的“stolen code”复制到正常入口处，最后重建.（脱壳注意不要重建输入表）</p>
+<h2 id="2019-1-21"><a href="#2019-1-21" class="headerlink" title="2019/1/21"></a>2019/1/21</h2><h4 id="寻找ACProtect的stolen-code"><a href="#寻找ACProtect的stolen-code" class="headerlink" title="寻找ACProtect的stolen code"></a>寻找ACProtect的stolen code</h4><ol>
+<li>设置异常（忽略除INT3中断的所有异常），隐藏OD，到最后一次异常</li>
+<li>se句柄位置下内存访问断点</li>
+<li>shift+f9两次（每次都下cc端点）</li>
+<li>再次shift+f9看到retn后</li>
+<li>去掉所有断点再运行到retn处</li>
+<li>此处的retn是寻找stolen code的最佳位置，下<strong>d 12ffc0</strong>，下硬件断点。SHIFT+F9。<br>（这个断点ximo说的是acprotect的致命处。具体原因先填一个坑）</li>
+<li>记下Stolen Code（<strong>二进制复制</strong>）</li>
+<li>找到内存，在00401000处下断，F2，SHIFT+F9。</li>
+<li>写入真实的代码,OD插件脱壳(修正OEP地址)</li>
+<li>IR修复，用等级3。不能修复的CUT掉。抓取修复。程序还是抱错！</li>
+<li>做下处理。来到壳的入口。也就是第一步记下的地址</li>
+<li>写入真的OEP代码。</li>
+<li>Lord PE修正入口点</li>
+</ol>
+<p>(摘自教程，讲的十分详细了)</p>
+<h2 id="2019-1-26"><a href="#2019-1-26" class="headerlink" title="2019/1/26"></a>2019/1/26</h2><h4 id="ACProtect-V2-0-X"><a href="#ACProtect-V2-0-X" class="headerlink" title="ACProtect V2.0.X"></a>ACProtect V2.0.X</h4><p><strong>VB程序修复</strong><br>对于VB程序的常见入口例如</p>
+<pre><code>......
+00401122   jmp dword ptr ds: [&lt;&amp;MSVBVM60.#ThunRTMain&gt;;  msvbvm60.ThunRTMain  #一系列库函数
+00401128   push 工程1.00401288
+0040112D   call &lt;jmp.&amp;MSVBVM60.#ThunRTMain_100&gt;
+</code></pre><p>加壳后的入口点变为</p>
+<pre><code>....
+004012CE  jmp dword ptr ds:[0x401078]  ;  msvbvm60.ThunRTMain
+004012D4  db 29;  CHAR &#39;)&#39;
+004012D5  db BA
+.....
+</code></pre><p>不难对比发现缺少了push和call两行。push的是入口处（前一行jmp中含有入口信息），call的是main函数的位置（push前一行的那个jmp）。我们所需要补全的也就是这两行汇编</p>
 
   </div>
   <!--评论块-->
@@ -302,7 +335,7 @@
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-6之前的笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">2018/11/6之前的笔记</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-6"><span class="post-toc-number">2.</span> <span class="post-toc-text">2018/11/6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱fsg壳"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">手脱fsg壳</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱PECompact2-X"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">手脱PECompact2.X</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-13"><span class="post-toc-number">3.</span> <span class="post-toc-text">2018/11/13</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱TELock0-98b1壳"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">手脱TELock0.98b1壳</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-14"><span class="post-toc-number">4.</span> <span class="post-toc-text">2018/11/14</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱exe32pack壳"><span class="post-toc-number">4.0.1.</span> <span class="post-toc-text">手脱exe32pack壳</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-16"><span class="post-toc-number">5.</span> <span class="post-toc-text">2018/11/16</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件绿化"><span class="post-toc-number">5.0.1.</span> <span class="post-toc-text">软件绿化</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-20"><span class="post-toc-number">6.</span> <span class="post-toc-text">2018/11/20</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件绿化2"><span class="post-toc-number">6.0.1.</span> <span class="post-toc-text">软件绿化2</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-10"><span class="post-toc-number">7.</span> <span class="post-toc-text">2018/12/10</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#附加数据（overlay）处理"><span class="post-toc-number">7.0.1.</span> <span class="post-toc-text">附加数据（overlay）处理</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-11"><span class="post-toc-number">8.</span> <span class="post-toc-text">2018/12/11</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#程序自校验去除"><span class="post-toc-number">8.0.1.</span> <span class="post-toc-text">程序自校验去除</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-12"><span class="post-toc-number">9.</span> <span class="post-toc-text">2018/12/12</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-13"><span class="post-toc-number">10.</span> <span class="post-toc-text">2018/12/13</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Aspack变形壳"><span class="post-toc-number">10.0.1.</span> <span class="post-toc-text">Aspack变形壳</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-14"><span class="post-toc-number">11.</span> <span class="post-toc-text">2018/12/14</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ACProtect132（无stolen-code）"><span class="post-toc-number">11.0.1.</span> <span class="post-toc-text">ACProtect132（无stolen code）</span></a></li></ol></li></ol></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-6之前的笔记"><span class="post-toc-number">1.</span> <span class="post-toc-text">2018/11/6之前的笔记</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-6"><span class="post-toc-number">2.</span> <span class="post-toc-text">2018/11/6</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱fsg壳"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">手脱fsg壳</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱PECompact2-X"><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">手脱PECompact2.X</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-13"><span class="post-toc-number">3.</span> <span class="post-toc-text">2018/11/13</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱TELock0-98b1壳"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">手脱TELock0.98b1壳</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-14"><span class="post-toc-number">4.</span> <span class="post-toc-text">2018/11/14</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#手脱exe32pack壳"><span class="post-toc-number">4.0.1.</span> <span class="post-toc-text">手脱exe32pack壳</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-16"><span class="post-toc-number">5.</span> <span class="post-toc-text">2018/11/16</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件绿化"><span class="post-toc-number">5.0.1.</span> <span class="post-toc-text">软件绿化</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-11-20"><span class="post-toc-number">6.</span> <span class="post-toc-text">2018/11/20</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#软件绿化2"><span class="post-toc-number">6.0.1.</span> <span class="post-toc-text">软件绿化2</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-10"><span class="post-toc-number">7.</span> <span class="post-toc-text">2018/12/10</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#附加数据（overlay）处理"><span class="post-toc-number">7.0.1.</span> <span class="post-toc-text">附加数据（overlay）处理</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-11"><span class="post-toc-number">8.</span> <span class="post-toc-text">2018/12/11</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#程序自校验去除"><span class="post-toc-number">8.0.1.</span> <span class="post-toc-text">程序自校验去除</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-12"><span class="post-toc-number">9.</span> <span class="post-toc-text">2018/12/12</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-13"><span class="post-toc-number">10.</span> <span class="post-toc-text">2018/12/13</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Aspack变形壳"><span class="post-toc-number">10.0.1.</span> <span class="post-toc-text">Aspack变形壳</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2018-12-14"><span class="post-toc-number">11.</span> <span class="post-toc-text">2018/12/14</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ACProtect132（无stolen-code）"><span class="post-toc-number">11.0.1.</span> <span class="post-toc-text">ACProtect132（无stolen code）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2019-1-20"><span class="post-toc-number">12.</span> <span class="post-toc-text">2019/1/20</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ACProtect132（有stolen-code）"><span class="post-toc-number">12.0.1.</span> <span class="post-toc-text">ACProtect132（有stolen code）</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2019-1-21"><span class="post-toc-number">13.</span> <span class="post-toc-text">2019/1/21</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#寻找ACProtect的stolen-code"><span class="post-toc-number">13.0.1.</span> <span class="post-toc-text">寻找ACProtect的stolen code</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2019-1-26"><span class="post-toc-number">14.</span> <span class="post-toc-text">2019/1/26</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#ACProtect-V2-0-X"><span class="post-toc-number">14.0.1.</span> <span class="post-toc-text">ACProtect V2.0.X</span></a></li></ol></li></ol></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
