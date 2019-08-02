@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  
+  <meta name="keywords" content="敬畏之心">
+  <meta name="description" content="学习代码之路">
+  
+  <title>太空独角兽</title>
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/materialize.min.css">
+    
+      <link rel="stylesheet" href="/css/main.min.css">
+    
+  
+  <style type="text/css">
+      html{
+          font-family: sans-serif;
+          font-weight: 300;
+      }
+      @font-face {
+          font-family: 'Material Icons';
+          font-style: normal;
+          font-weight: 400;
+          src: url(/fonts/MaterialIcons-Regular.eot);
+          src: url(/fonts/MaterialIcons-Regular.woff2) format('woff2'),
+          url(/fonts/MaterialIcons-Regular.woff) format('woff'),
+          url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
+      }
+  </style>
+<link rel="shortcut icon" href="/source/favicon.jpg">
+<link rel="stylesheet" href="/css/prism-duotone-sea.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
+<script src="/js/prism-line-numbers.min.js"></script></head>
+<body>
+<div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
+<div id="menu-outer">
+  <div id="menu-inner">
+      <ul id="slide-out" class="side-nav" >
+    <div class="nav-header"  style="background-image: url(/images/header-bg.png);background-color:#272727">
+    <div class="header-box"><img src="/images/明石.jpg" ondragstart="return false;"></div>
+    <p>太空独角兽</p>
+    <div class="nav-link">
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box twitter"></div></a>
+        
+        
+        <a href="https://github.com/mskzj" target="_blank"><div class="link-box github"></div></a>
+        
+        
+        <a href="mailto:mskzj123456@163.com"><div class="link-box email"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"><div class="link-box weibo"></div></a>
+        
+        
+        <a href="http://example.com" target="_blank"> <div class="link-box zhihu"></div></a>
+        
+    </div>
+    <div class="nav-search">
+        <form id="search-form"> <!-- 搜索框相关 -->
+            <input type="text" id="local-search-input" name="q" results="0" placeholder="搜索..." class="search form-control" autocomplete="off" autocorrect="off"/>
+            <div class="nav-search-img"><i class="material-icons">search</i></div>
+        </form>
+        <div id="local-search-result"></div> <!-- 搜索结果区 -->
+        <p class='no-result'>无搜索结果</p>
+    </div>
+</div>
+    <!--Homepage-->
+
+<li class="nav-list">
+    <a href="/" target="_self">
+        <div class="nav-ico"><i class="material-icons">home</i> </div><p>主页</p>
+    </a>
+</li>
+
+<!--archives-->
+
+<li class="nav-list dropdown-btn">
+    <a  class=""  target="_self">
+        <div class="nav-ico"><i class="material-icons">assignment</i></div><p>归档</p><div class="dropdown-ico"><i class="material-icons">arrow_drop_down</i></div>
+    </a>
+</li>
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="archive-link" href="/archives/2019/08/">August 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2019/07/">July 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2019/01/">January 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">5</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+    </li>
+</ul>
+<!--categories-->
+
+<ul class="dropdown-menu dropdown" >
+    <li class="nav-dropdown-list">
+        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">7</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">2</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
+    </li>
+</ul>
+<!--tags-->
+
+<li class="nav-list">
+    <a href="/archives" target="_self">
+        <div class="nav-ico"><i class="material-icons">bookmark</i> </div><p>标签</p>
+    </a>
+</li>
+
+<!--photo-->
+
+<!--friends-->
+
+<li class="nav-list">
+    <a href="/friends" target="_self">
+        <div class="nav-ico"><i class="material-icons">face</i> </div><p>友链</p>
+    </a>
+</li>
+
+<!--about-->
+
+<li class="nav-list">
+    <a href="/about" target="_self">
+        <div class="nav-ico"><i class="material-icons">copyright</i> </div><p>关于</p>
+    </a>
+</li>
+
+
+</ul>
+
+  </div>
+</div>
+
+<div id="content-outer">
+  <div id="content-inner">
+    
+<article id="post">
+  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-7.png)" >
+  <h2>隐藏debug探秘</h2>
+    
+  <p>作者:太空独角兽 &nbsp&nbsp 发布于:<time datetime="2019-08-01T00:53:13.000Z">
+          2019-08-01
+    </time>
+  </p>
+    
+  </div>
+  <div class="post-page-content">
+  <h3 id="写在最前"><a href="#写在最前" class="headerlink" title="#写在最前"></a>#写在最前</h3><p>这篇文章的原理自于加密解密（第三版），读者有兴趣可以自行实现这个检测和隐藏debugger的小功能。</p>
+<p>原理很简单：使用debugger的时候，程序会带上debugger的标记，我们需要做的就是找到标记点然后清除这个标记。</p>
+<p>标记：</p>
+<blockquote>
+<p>debug的连锁反应：</p>
+<p>BeingDebugged-&gt;NtGlobalFlag-&gt;flag-&gt;heap magic</p>
+</blockquote>
+<p>不过笔者认为纸上得来终觉浅，实际操作解决各种不知道那里冒出来的问题才会提升自己的能力（所以多写多练方才是正道）。在整个学习过程中，笔者花了大部分的时间在于使用win的API编程和规范代码。</p>
+<h3 id="BeingDebugged"><a href="#BeingDebugged" class="headerlink" title="#BeingDebugged"></a>#BeingDebugged</h3><pre><code>位置：peb+2
+大小：byte
+影响范围：NtGlobalFlag
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:center">被调试</th>
+<th style="text-align:center">正常</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">值</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="NtGlobalFlag"><a href="#NtGlobalFlag" class="headerlink" title="#NtGlobalFlag"></a>#NtGlobalFlag</h3><pre><code>位置：peb+68h
+大小：byte
+影响范围：heap magic
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:center">被调试</th>
+<th style="text-align:center">正常</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">值</td>
+<td style="text-align:center">70h</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+<p>值得注意的是：如果<code>BeingDebugged</code>为True，<code>NtGlobalFlag</code>的70h并非直接赋值，而是通过一系列标志设置（如<code>FLG_HEAP_ENABLE_CHECK</code>）。而由此所引发的连锁反应可就不那么简单了。他将留下许多的痕迹（笑：）</p>
+<h3 id="heap-magic，Flags"><a href="#heap-magic，Flags" class="headerlink" title="#heap magic，Flags"></a>#heap magic，Flags</h3><pre><code>Heap位置：peb+18h
+Heap-&gt;Flags位置：heap+0ch
+Heap-&gt;ForceFlags位置：heap+10h
+影响范围：堆相关
+</code></pre><p>依据NtGlobalFlag的值来设置了堆的Flags，堆的Flags会影响进程堆的Flags和ForceFlags,同时函数<code>RtlCreateHeap</code>需要Flags的值来创建堆栈。故此堆栈会带上Flags的印记。</p>
+<pre><code>NTSYSAPI PVOID RtlCreateHeap(
+  ULONG                Flags,
+  PVOID                HeapBase,
+  SIZE_T               ReserveSize,
+  SIZE_T               CommitSize,
+  PVOID                Lock,
+  PRTL_HEAP_PARAMETERS Parameters
+);
+</code></pre><p>其中调试堆会被标记填充一些奇怪的东西，一般为以下三个</p>
+<pre><code>BAADF00D
+FEEEFEEE
+ABABABAB
+</code></pre><p>可以通过对调试堆中检测以上三个来判定是否被调试。这是对创建堆结果的检测来判断是否被调试。</p>
+<p>不过根据《加密解密》其中更简单的方法检测Heap 的Flags和ForceFlags的值，这是对创建堆源头检测来判断是否被调试。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">正常</th>
+<th>被调试(通常)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Flags</td>
+<td style="text-align:center">2</td>
+<td>50000062h</td>
+</tr>
+<tr>
+<td style="text-align:center">ForceFlags</td>
+<td style="text-align:center">0</td>
+<td>40000060h</td>
+</tr>
+</tbody>
+</table>
+<p>可惜这种方法在编写程序和查看的时候并没有得到印证，数据跟书中所说并不符合。<strong>这里留个疑问，以后解决</strong></p>
+<h1 id="检测被调试"><a href="#检测被调试" class="headerlink" title="检测被调试"></a>检测被调试</h1><pre><code>bool MyIsDebugger(ULONG PebBase, HANDLE hProcess) {
+//读取目标进程PEB
+_myPEB* Peb_buffer = (_myPEB*)malloc(sizeof(_myPEB));
+memset((void *)Peb_buffer, 0, sizeof(_myPEB));
+int ret = ReadProcessMemory(hProcess, (LPCVOID)PebBase, Peb_buffer, sizeof(_myPEB), NULL);
+//读取成功
+if (ret == 1) {
+    //判断BeingDebugged，NtGlobalFlag标志
+    byte bedebugged = Peb_buffer-&gt;bBeingDebugged;
+    DWORD NtGlobalFlag = Peb_buffer-&gt;dwNtGlobalFlag;
+    cout &lt;&lt; &quot;-----------------------show status----------------\n&quot; &lt;&lt; endl;
+    if ((int)bedebugged == 1 || (int)NtGlobalFlag == 0x70)
+    {
+        //判断堆中Magic信息
+
+        cout &lt;&lt; &quot;your are debugging me\n&quot; &lt;&lt; endl;
+    }
+    else {
+        cout &lt;&lt; &quot;your are not debugging me\n&quot; &lt;&lt; endl;
+    }
+    cout &lt;&lt; &quot;-------------------------------------------------\n&quot; &lt;&lt; endl;
+}
+//读取失败
+else {
+    cout &lt;&lt; &quot;读取目标进程的内存失败&quot; &lt;&lt; endl;
+    //perror(&quot;perror say&quot;);
+    char buffer[256];
+    strerror_s(buffer, 100, GetLastError());
+    cout &lt;&lt; &quot;error：&quot; &lt;&lt; GetLastError() &lt;&lt; &quot;:&quot; &lt;&lt; buffer &lt;&lt; endl;
+
+    free(Peb_buffer);
+    return FALSE;
+}
+}
+</code></pre><h1 id="修改被调试"><a href="#修改被调试" class="headerlink" title="修改被调试"></a>修改被调试</h1><pre><code>//清除PEB中BeingDebugged,NtGlobalFlag信息
+bool clearBeingDebugged(ULONG PebBase, HANDLE hProcess) {
+
+//清空BeingDebugged为0
+byte flag = 0;
+
+int ret = WriteProcessMemory(hProcess, (LPVOID)(PebBase + 2), &amp;flag, sizeof(byte), NULL);
+int ret2 = WriteProcessMemory(hProcess, (LPVOID)(PebBase + 0x68), &amp;flag, sizeof(byte), NULL);
+//写入成功
+if (ret != 0 &amp;&amp; ret2 != 0) {
+    cout &lt;&lt; &quot;----------------------\n清空BeingDebugged,NtGlobalFlag为0写入成功,隐藏debug-----------\n &quot; &lt;&lt; endl;
+    return TRUE;
+}
+//写入失败
+else {
+    cout &lt;&lt; &quot;----------------------\n读取目标进程的内存失败------------------\n&quot; &lt;&lt; endl;
+    //perror(&quot;perror say&quot;);
+    char buffer[256];
+    strerror_s(buffer, 100, GetLastError());
+    cout &lt;&lt; &quot;error：&quot; &lt;&lt; GetLastError() &lt;&lt; &quot;:&quot; &lt;&lt; buffer &lt;&lt; endl;
+    return FALSE;
+}
+}
+</code></pre><h3 id="效果"><a href="#效果" class="headerlink" title="#效果"></a>#效果</h3><pre><code>input pid
+12068
+pid:12068        PebBase: 0xe64000
+-----------------------show status----------------
+
+your are debugging me
+
+-------------------------------------------------
+
+PEB: e64000
+BeingDebugged: 1
+NtGlobalFlag：0x70
+Heap-&gt;Flags：0x2
+Heap-&gt;ForceFlags：0x12f00a4
+----------------------
+清空BeingDebugged,NtGlobalFlag为0写入成功,隐藏debug-----------
+
+PEB: e64000
+BeingDebugged: 0
+NtGlobalFlag：0x0
+Heap-&gt;Flags：0x2
+Heap-&gt;ForceFlags：0x12f00a4
+-----------------------show status----------------
+
+your are not debugging me
+
+-------------------------------------------------
+</code></pre><p>可从上面运行结果显示如果清除<code>BeingDebugged</code>，<code>NtGlobalFlag</code>可以得到很好的效果，但是其他影响却不能得到很好的印证，例如heap的Flags和ForceFlags的值确实跟书中提及到的不同。猜测OS版本的更新导致了细微的变化。</p>
+<p>以后再说啦，书中还有个写调试器从源头解决BeingDebugged的办法感觉很有意思，不过还是先度个周末先，yeah!</p>
+
+  </div>
+  <!--评论块-->
+    
+
+</article>
+<nav class="post-nav">
+  <!-- Prev Nav -->
+    
+
+
+  <!-- Next Nav -->
+    
+  <a href="/2019/07/25/吾将上下而求索/" id="post_nav-older" class="post-nav-content next-content">
+      旧篇
+  </a>
+    
+</nav>
+<div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
+<div class="post-toc-none"><p>(无)</p></div>
+<div class="post-toc-box">
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#写在最前"><span class="post-toc-number">1.</span> <span class="post-toc-text">#写在最前</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BeingDebugged"><span class="post-toc-number">2.</span> <span class="post-toc-text">#BeingDebugged</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NtGlobalFlag"><span class="post-toc-number">3.</span> <span class="post-toc-text">#NtGlobalFlag</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#heap-magic，Flags"><span class="post-toc-number">4.</span> <span class="post-toc-text">#heap magic，Flags</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#检测被调试"><span class="post-toc-number"></span> <span class="post-toc-text">检测被调试</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#修改被调试"><span class="post-toc-number"></span> <span class="post-toc-text">修改被调试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#效果"><span class="post-toc-number">1.</span> <span class="post-toc-text">#效果</span></a></li></ol>
+</div>
+<!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
+<script type="text/javascript">
+    menu();
+</script>
+  </div>
+</div>
+<div id="bottom-outer">
+  <div id="bottom-inner">
+    <a  id="top-button" onfocus="this.blur();"><div class="up upinbody" style="background-color:#272727"><i class="material-icons material-up">vertical_align_top</i></div></a>
+
+
+<p >Copyright ©  2018  太空独角兽</p>
+<p style="font-size: 10px" id="footer-times" data-time="4/4/2018"></p>
+<script>
+    var beginTime=document.getElementById("footer-times").dataset.time
+    function show_date_time(){
+        var span=document.getElementById("footer-times")
+        window.setTimeout("show_date_time()", 1000);
+        BirthDay=new Date(beginTime);//初始日期
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=Math.floor(e_hrsold);
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=Math.floor((e_hrsold-hrsold)*60);
+        seconds=Math.floor((e_minsold-minsold)*60);
+        span.innerHTML="本站已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+    }
+    show_date_time();
+</script>
+
+  </div>
+</div>
+
+<!--影集界面需要的资源-->
+
+
+
+<!-- scripts list from theme config.yml -->
+
+<script src="/js/jquery-3.1.1.min.js"></script>
+
+<script src="/js/materialize.min.js"></script>
+
+<script src="/js/main.min.js"></script>
+
+
+<script>
+    NProgress.start();
+    NProgress.done();
+    lazy();
+    links();
+    window.onpopstate = menu();
+    //pjax操作
+    $(document).pjax('a:not(.nopjax)', '#content-inner', {fragment:'#content-inner', timeout:8000});
+    $(document).on('pjax:start', NProgress.start).on('pjax:end', NProgress.done)
+        .on('pjax:end', () => {
+            dowmdiv();
+            lazy();
+            toc();
+            links();
+            menu();
+        });
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+</body>
+</html>
