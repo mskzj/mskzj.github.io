@@ -87,14 +87,14 @@
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="archive-link" href="/archives/2019/08/">August 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2019/07/">July 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2019/01/">January 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">5</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
+        <a class="archive-link" href="/archives/2019/08/">August 2019<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2019/07/">July 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2019/01/">January 2019<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/11/">November 2018<span class="archive-count">5</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/09/">September 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/05/">May 2018<span class="archive-count">2</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/04/">April 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/03/">March 2018<span class="archive-count">1</span></a></li><li class="nav-dropdown-list"><a class="archive-link" href="/archives/2018/02/">February 2018<span class="archive-count">1</span></a>
     </li>
 </ul>
 <!--categories-->
 
 <ul class="dropdown-menu dropdown" >
     <li class="nav-dropdown-list">
-        <a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">7</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">2</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
+        <a class="category-link" href="/categories/ctf/">ctf<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web学习/">web学习<span class="category-count">1</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/web安全/">web安全<span class="category-count">7</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/生活/">生活<span class="category-count">3</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/编程/">编程<span class="category-count">2</span></a></li><li class="nav-dropdown-list"><a class="category-link" href="/categories/逆向/">逆向<span class="category-count">1</span></a>
     </li>
 </ul>
 <!--tags-->
@@ -133,7 +133,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-7.png)" >
+  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-6.png)" >
   <h2>隐藏debug探秘</h2>
     
   <p>作者:太空独角兽 &nbsp&nbsp 发布于:<time datetime="2019-08-01T00:53:13.000Z">
@@ -151,7 +151,7 @@
 <p>BeingDebugged-&gt;NtGlobalFlag-&gt;flag-&gt;heap magic</p>
 </blockquote>
 <p>不过笔者认为纸上得来终觉浅，实际操作解决各种不知道那里冒出来的问题才会提升自己的能力（所以多写多练方才是正道）。在整个学习过程中，笔者花了大部分的时间在于使用win的API编程和规范代码。</p>
-<h3 id="BeingDebugged"><a href="#BeingDebugged" class="headerlink" title="#BeingDebugged"></a>#BeingDebugged</h3><pre><code>位置：peb+2
+<h2 id="检测"><a href="#检测" class="headerlink" title="#检测"></a>#检测</h2><h3 id="BeingDebugged"><a href="#BeingDebugged" class="headerlink" title="#BeingDebugged"></a>#BeingDebugged</h3><pre><code>位置：peb+2
 大小：byte
 影响范围：NtGlobalFlag
 </code></pre><table>
@@ -231,7 +231,9 @@ ABABABAB
 </tbody>
 </table>
 <p>可惜这种方法在编写程序和查看的时候并没有得到印证，数据跟书中所说并不符合。<strong>这里留个疑问，以后解决</strong></p>
-<h1 id="检测被调试"><a href="#检测被调试" class="headerlink" title="检测被调试"></a>检测被调试</h1><pre><code>bool MyIsDebugger(ULONG PebBase, HANDLE hProcess) {
+<hr>
+<p>代码</p>
+<pre><code>bool MyIsDebugger(ULONG PebBase, HANDLE hProcess) {
 //读取目标进程PEB
 _myPEB* Peb_buffer = (_myPEB*)malloc(sizeof(_myPEB));
 memset((void *)Peb_buffer, 0, sizeof(_myPEB));
@@ -265,7 +267,7 @@ else {
     return FALSE;
 }
 }
-</code></pre><h1 id="修改被调试"><a href="#修改被调试" class="headerlink" title="修改被调试"></a>修改被调试</h1><pre><code>//清除PEB中BeingDebugged,NtGlobalFlag信息
+</code></pre><h1 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h1><pre><code>//清除PEB中BeingDebugged,NtGlobalFlag信息
 bool clearBeingDebugged(ULONG PebBase, HANDLE hProcess) {
 
 //清空BeingDebugged为0
@@ -316,8 +318,26 @@ your are not debugging me
 
 -------------------------------------------------
 </code></pre><p>可从上面运行结果显示如果清除<code>BeingDebugged</code>，<code>NtGlobalFlag</code>可以得到很好的效果，但是其他影响却不能得到很好的印证，例如heap的Flags和ForceFlags的值确实跟书中提及到的不同。猜测OS版本的更新导致了细微的变化。</p>
-<p>以后再说啦，书中还有个写调试器从源头解决BeingDebugged的办法感觉很有意思，不过还是先度个周末先，yeah!</p>
+<h2 id="检测进阶"><a href="#检测进阶" class="headerlink" title="#检测进阶"></a>#检测进阶</h2><p>使用<code>CheckRemoteDebuggerPresent</code>来检测是否使用调试器，这个函数检测的是用户调试接口<code>ProcessDebugPort</code>（代号7）。</p>
+<p>由于这种检测方式是直接检测接口，所以方式很直观，没有什么好说的。</p>
+<hr>
+<p>代码</p>
+<pre><code>bool CheckDebugger(HANDLE hProcess) {
+    HINSTANCE hModule;
+    BOOL bDebuggerPresent = FALSE;
+    check_remote_debugger_present CheckRemoteDebuggerPresent;
+    hModule = GetModuleHandleA(&quot;kernel32&quot;);
+    CheckRemoteDebuggerPresent = (check_remote_debugger_present)GetProcAddress(hModule, &quot;CheckRemoteDebuggerPresent&quot;);
 
+    bool retn = CheckRemoteDebuggerPresent(hProcess, &amp;bDebuggerPresent)?bDebuggerPresent:FALSE;
+    if (retn == TRUE)
+        cout&lt;&lt; &quot;your are  debugging me\n&quot; &lt;&lt;endl;
+    else {
+        cout&lt;&lt; &quot;your are not debugging me\n&quot; &lt;&lt;endl;
+    }
+    return retn;
+</code></pre><p>}</p>
+<h2 id="修改进阶"><a href="#修改进阶" class="headerlink" title="#修改进阶"></a>#修改进阶</h2>
   </div>
   <!--评论块-->
     
@@ -325,6 +345,10 @@ your are not debugging me
 </article>
 <nav class="post-nav">
   <!-- Prev Nav -->
+    
+  <a href="/2019/08/09/某道RE题分析/" id="post_nav-newer" class="post-nav-content prev-content">
+      新篇
+  </a>
     
 
 
@@ -338,7 +362,7 @@ your are not debugging me
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#写在最前"><span class="post-toc-number">1.</span> <span class="post-toc-text">#写在最前</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BeingDebugged"><span class="post-toc-number">2.</span> <span class="post-toc-text">#BeingDebugged</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NtGlobalFlag"><span class="post-toc-number">3.</span> <span class="post-toc-text">#NtGlobalFlag</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#heap-magic，Flags"><span class="post-toc-number">4.</span> <span class="post-toc-text">#heap magic，Flags</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#检测被调试"><span class="post-toc-number"></span> <span class="post-toc-text">检测被调试</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#修改被调试"><span class="post-toc-number"></span> <span class="post-toc-text">修改被调试</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#效果"><span class="post-toc-number">1.</span> <span class="post-toc-text">#效果</span></a></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#写在最前"><span class="post-toc-number">1.</span> <span class="post-toc-text">#写在最前</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#检测"><span class="post-toc-number"></span> <span class="post-toc-text">#检测</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#BeingDebugged"><span class="post-toc-number">1.</span> <span class="post-toc-text">#BeingDebugged</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#NtGlobalFlag"><span class="post-toc-number">2.</span> <span class="post-toc-text">#NtGlobalFlag</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#heap-magic，Flags"><span class="post-toc-number">3.</span> <span class="post-toc-text">#heap magic，Flags</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#修改"><span class="post-toc-number"></span> <span class="post-toc-text">修改</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#效果"><span class="post-toc-number">1.</span> <span class="post-toc-text">#效果</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#检测进阶"><span class="post-toc-number"></span> <span class="post-toc-text">#检测进阶</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#修改进阶"><span class="post-toc-number"></span> <span class="post-toc-text">#修改进阶</span></a>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
