@@ -133,7 +133,7 @@
   <div id="content-inner">
     
 <article id="post">
-  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-1.png)" >
+  <div class="post-page-title"  style="background-color:#272727;background-image:url(/images/random/vateral-9.png)" >
   <h2>某道RE题分析</h2>
     
   <p>作者:太空独角兽 &nbsp&nbsp 发布于:<time datetime="2019-08-09T07:27:31.000Z">
@@ -205,49 +205,43 @@ barely_reversible: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynam
 <p>5.</p>
 <pre><code>mark += sub_7D1(mark, v15, 0x5F5E100);
 </code></pre><p>最后对mark进行处理</p>
-<pre class="line-numbers language-sub_A01-&gt;sub_7D1-&gt;sub_72D```的分析："><code class="language-sub_A01-&gt;sub_7D1-&gt;sub_72D```的分析：">
-### sub_A01:
+<blockquote>
+<p>sub_A01-&gt;sub_7D1-&gt;sub_72D的分析：</p>
+</blockquote>
+<h3 id="sub-A01"><a href="#sub-A01" class="headerlink" title="sub_A01:"></a>sub_A01:</h3><p>中有一些很坑的点，值得好好分析</p>
+<pre><code>__int64 __fastcall sub_A01(__int64 temp, __int64 mark)
+{
+  __int64 rdtsc_v2; // ST18_8
+  __int64 v3; // ST20_8
+  __int64 v4; // ST28_8
+  __int64 v5; // rbx
+  __int64 v6; // rax
 
-中有一些很坑的点，值得好好分析
+  rdtsc_v2 = _rdtsc();
+  v3 = sub_99C(temp, mark);
+  v4 = sub_9EB(v3, mark);
+  v5 = sub_7D1(mark, rdtsc_v2, 0x5F5E100);
+  v6 = sub_944(v4);
+  return sub_99C(v6, v5);
+}
+</code></pre><p>可以看到这个东西跟俄罗斯套娃似的，里三层外三层。可仔细看整个函数简化为：</p>
+<pre><code>v3=(0x59D39E717F7 * m2 + 0x35E55F10E61 * temp_v - 0xC40BF11DDFCD22E) &amp; 0xFFFFFFFFFFFFFF
+v4=v3^m2
+v5=sub_7D1(mark, rdtsc_v2, 0x5F5E100);
+v6=(v4 &gt;&gt; 48) ^ (v4 &gt;&gt; 40) ^ (v4 &gt;&gt; 32) ^ (v4 &gt;&gt; 24) ^ v4 ^ (v4 &gt;&gt; 8) ^ (v4 &gt;&gt; 16) ^ (v4 &gt;&gt; 56)
+#        1-2        1 -3         1 -4         1-5     1-8     1-7         1 -6            1
+return (0x59D39E717F7 * v5 + 0x35E55F10E61 * v6 - 0xC40BF11DDFCD22E) &amp; 0xFFFFFFFFFFFFFF
+</code></pre><p>值得注意这里也用了<code>sub_7D1</code>，观察它</p>
+<h3 id="sub-7D1"><a href="#sub-7D1" class="headerlink" title="sub_7D1"></a>sub_7D1</h3><pre><code>__int64 __fastcall sub_7D1(int mark, __int64 v2, int a3)
+{
+  int v3; // ST08_4
+  unsigned __int64 v4; // rax
 
-    __int64 __fastcall sub_A01(__int64 temp, __int64 mark)
-    {
-      __int64 rdtsc_v2; // ST18_8
-      __int64 v3; // ST20_8
-      __int64 v4; // ST28_8
-      __int64 v5; // rbx
-      __int64 v6; // rax
-
-      rdtsc_v2 = _rdtsc();
-      v3 = sub_99C(temp, mark);
-      v4 = sub_9EB(v3, mark);
-      v5 = sub_7D1(mark, rdtsc_v2, 0x5F5E100);
-      v6 = sub_944(v4);
-      return sub_99C(v6, v5);
-    }
-可以看到这个东西跟俄罗斯套娃似的，里三层外三层。可仔细看整个函数简化为：
-
-    v3=(0x59D39E717F7 * m2 + 0x35E55F10E61 * temp_v - 0xC40BF11DDFCD22E) & 0xFFFFFFFFFFFFFF
-    v4=v3^m2
-    v5=sub_7D1(mark, rdtsc_v2, 0x5F5E100);
-    v6=(v4 >> 48) ^ (v4 >> 40) ^ (v4 >> 32) ^ (v4 >> 24) ^ v4 ^ (v4 >> 8) ^ (v4 >> 16) ^ (v4 >> 56)
-    #        1-2        1 -3         1 -4         1-5     1-8     1-7         1 -6            1
-    return (0x59D39E717F7 * v5 + 0x35E55F10E61 * v6 - 0xC40BF11DDFCD22E) & 0xFFFFFFFFFFFFFF
-
-值得注意这里也用了```sub_7D1```，观察它
-### sub_7D1
-
-    __int64 __fastcall sub_7D1(int mark, __int64 v2, int a3)
-    {
-      int v3; // ST08_4
-      unsigned __int64 v4; // rax
-
-      v3 = a3;                                      // 0x5F5E100
-      v4 = _rdtsc();
-      return sub_72D((unsigned int)((v4 - v2) / v3) + mark);// (v4-v2)/0x5f5e100 < 0 故为0
-    }
-原来它也是一个俄罗斯套娃，可以看到从```sub_A01```传进来的参数``` rdtsc_v2 = _rdtsc();```终于通过层层包裹到达了使用它的地方。```((v4 - v2) / v3)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  v3 = a3;                                      // 0x5F5E100
+  v4 = _rdtsc();
+  return sub_72D((unsigned int)((v4 - v2) / v3) + mark);// (v4-v2)/0x5f5e100 &lt; 0 故为0
+}
+</code></pre><p>原来它也是一个俄罗斯套娃，可以看到从<code>sub_A01</code>传进来的参数<code>rdtsc_v2 = _rdtsc();</code>终于通过层层包裹到达了使用它的地方。<code>((v4 - v2) / v3)</code></p>
 <blockquote>
 <p>_rdtsc() 指令返回的是自开机始CPU的周期数</p>
 </blockquote>
@@ -448,7 +442,7 @@ if __name__==&quot;__main__&quot;:
 <div class="post-toc-btn"><i class="material-icons">format_list_numbered</i></div>
 <div class="post-toc-none"><p>(无)</p></div>
 <div class="post-toc-box">
-    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分析文件"><span class="post-toc-number">1.</span> <span class="post-toc-text">#分析文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深入校验函数"><span class="post-toc-number">2.</span> <span class="post-toc-text">#深入校验函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sub-72D"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">sub_72D</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#逆向"><span class="post-toc-number">3.</span> <span class="post-toc-text">#逆向</span></a></li></ol>
+    <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#分析文件"><span class="post-toc-number">1.</span> <span class="post-toc-text">#分析文件</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#深入校验函数"><span class="post-toc-number">2.</span> <span class="post-toc-text">#深入校验函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sub-A01"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">sub_A01:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sub-7D1"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">sub_7D1</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#sub-72D"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">sub_72D</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#逆向"><span class="post-toc-number">3.</span> <span class="post-toc-text">#逆向</span></a></li></ol>
 </div>
 <!--<div class="post-back"><i class="material-icons">arrow_back</i></div>-->
 <script type="text/javascript">
